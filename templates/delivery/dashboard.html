@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopSmart - Rider Console</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0b1326",
+                      "surface": "#0b1326",
+                      "surface-container": "#171f33",
+                      "surface-container-low": "#131b2e",
+                      "surface-container-high": "#222a3d",
+                      "on-background": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "on-surface-variant": "#c6c5d5",
+                      "primary": "#bdc2ff",
+                      "primary-container": "#818cf8",
+                      "on-primary": "#131e8c",
+                      "secondary": "#44e2cd",
+                      "on-secondary": "#003731",
+                      "outline-variant": "#454653"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden flex flex-col justify-between">
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30">
+        <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-primary text-2xl">sports_motorsports</span>
+            <h1 class="font-headline-lg text-lg font-bold text-primary">Rider Operations</h1>
+        </div>
+        <a href="/auth/logout" class="p-2 rounded-full hover:bg-surface-container-high/50 text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">logout</span>
+        </a>
+    </header>
+
+    <main class="pt-24 pb-12 max-w-[1440px] w-full mx-auto px-6 flex-grow">
+        <div class="flex flex-col gap-6">
+            <div>
+                <h2 class="font-headline-lg text-3xl font-semibold">Active Shipments</h2>
+                <p class="text-on-surface-variant text-sm mt-1">Accept local jobs, track statuses, and fulfill dropoffs.</p>
+            </div>
+
+            <!-- Table section -->
+            <div class="glass-card p-6 rounded-3xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-headline-lg text-lg font-bold">Open Job Board</h3>
+                    <span class="material-symbols-outlined text-outline">tune</span>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-outline-variant/35 text-xs font-mono uppercase tracking-wider text-on-surface-variant">
+                                <th class="pb-3 pl-2">Job ID</th>
+                                <th class="pb-3">Pickup From</th>
+                                <th class="pb-3">Status</th>
+                                <th class="pb-3 pr-2 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobs-body">
+                            <tr>
+                                <td colspan="4" class="py-8 text-center text-on-surface-variant text-sm">
+                                    <span class="material-symbols-outlined text-4xl text-outline-variant/40 animate-pulse block mb-2">hourglass_empty</span>
+                                    <span>Scanning active grid for pickup orders...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full max-w-[1440px] mx-auto px-6 py-6 border-t border-outline-variant/10 text-center text-xs font-mono text-on-surface-variant">
+        © 2026 ShopSmart Multivendor Inc. Rider Delivery Fleet.
+    </footer>
+
+    <script>
+        async function loadJobs() {
+            try {
+                const res = await fetch('/delivery/api/jobs');
+                const jobs = await res.json();
+                
+                const body = document.getElementById('jobs-body');
+                body.innerHTML = ''; // Reset
+                
+                if (!jobs || jobs.length === 0) {
+                    body.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-on-surface-variant text-sm">No new orders waiting for rider pickup right now. Check back soon!</td></tr>`;
+                    return;
+                }
+                
+                jobs.forEach(j => {
+                    const row = document.createElement('tr');
+                    row.className = "border-b border-outline-variant/15 hover:bg-surface-container-high/20 transition-colors";
+                    
+                    row.innerHTML = `
+                        <td class="py-4 pl-2 font-mono text-xs font-semibold text-primary">#JOB-00${j.id}</td>
+                        <td class="py-4 text-sm font-semibold text-on-surface">Kinetic Electronics Outlet (Shop #${j.shop_id})</td>
+                        <td class="py-4">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/15 text-primary border border-primary/30">${j.status}</span>
+                        </td>
+                        <td class="py-4 pr-2 text-right">
+                            <button onclick="acceptJob(${j.id})" class="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-container to-secondary text-background text-xs font-bold shadow-md hover:shadow-lg active:scale-95 transition-all">Accept Job</button>
+                        </td>
+                    `;
+                    body.appendChild(row);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function acceptJob(orderId) {
+            const res = await fetch(`/delivery/api/job/${orderId}/accept`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Job accepted! Out for delivery. Press OK to simulate delivery dropoff.");
+                // Instantly trigger mock complete delivery dropoff for testing convenience
+                deliverJob(orderId);
+            } else {
+                alert(data.message);
+            }
+        }
+
+        async function deliverJob(orderId) {
+            const res = await fetch(`/delivery/api/job/${orderId}/deliver`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Delivery dropoff confirmed! Order successfully completed.");
+                loadJobs();
+            } else {
+                alert(data.message);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadJobs);
+    </script>
+</body>
+</html>

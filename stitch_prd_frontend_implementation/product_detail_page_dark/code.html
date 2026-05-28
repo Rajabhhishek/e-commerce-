@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopSmart - Product Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#003731",
+                    "surface-tint": "#bdc2ff",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "on-secondary-fixed": "#00201c",
+                    "surface-container-highest": "#2d3449",
+                    "on-background": "#dae2fd",
+                    "inverse-surface": "#dae2fd",
+                    "on-primary-container": "#101b8a",
+                    "primary-fixed": "#e0e0ff",
+                    "tertiary": "#f7bd3e",
+                    "on-tertiary-container": "#3e2b00",
+                    "on-primary-fixed-variant": "#2f3aa3",
+                    "on-error": "#690005",
+                    "inverse-primary": "#4953bc",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#c08d00",
+                    "surface-dim": "#0b1326",
+                    "background": "#0b1326",
+                    "surface-container-high": "#222a3d",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "on-tertiary-fixed": "#261900",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#060e20",
+                    "surface-container-low": "#131b2e",
+                    "on-primary-fixed": "#000767",
+                    "surface-container": "#171f33",
+                    "on-tertiary": "#402d00",
+                    "tertiary-fixed-dim": "#f7bd3e",
+                    "secondary-container": "#03c6b2",
+                    "inverse-on-surface": "#283044",
+                    "on-primary": "#131e8c",
+                    "on-surface": "#dae2fd",
+                    "on-surface-variant": "#c6c5d5",
+                    "secondary-fixed-dim": "#3cddc7",
+                    "tertiary-fixed": "#ffdea3",
+                    "surface": "#0b1326",
+                    "secondary-fixed": "#62fae3",
+                    "surface-bright": "#31394d",
+                    "outline": "#908f9e",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#004d44",
+                    "primary": "#bdc2ff",
+                    "outline-variant": "#454653",
+                    "on-secondary-fixed-variant": "#005047",
+                    "primary-container": "#818cf8",
+                    "secondary": "#44e2cd",
+                    "surface-variant": "#2d3449"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-desktop": "40px",
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "title-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .kinetic-glow:hover {
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+            border-color: #818cf8;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060e20;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">ShopSmart</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80 relative">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32 px-4 md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Section: Product Visuals -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Asymmetric Product Gallery -->
+<div class="lg:col-span-7 space-y-4">
+<div class="relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden glass-card group">
+<img alt="Premium Headphones" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A pair of high-end, matte black wireless headphones positioned against a deep atmospheric dark blue background. Professional studio lighting highlights the metallic textures and premium leather padding with a soft cyan rim light. The overall mood is sophisticated, technical, and luxurious, matching a modern dark-mode commerce aesthetic with indigo accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxq1CowI8K-eLe50yQuvQeqWap4PixWmhw0vpC7VXOH1EeEKTHT_ccIr6gjcumJSZSs3pSeAbUMAFU5IhcmxV8gCYkU8Kq_mEUPj_LWWbhL0Ukl5WP2AgSRz7bqSTTqavnI2f9RvEemV82gVWJiXd8RDufd4CbjKfuZ9csNxRsAbIMDKXKMBcmWl3ZBOmJI2qmQ9tploj10_sP85KtKp8WnUlbULyUWTPUjDNgRxwKWJh38bX0F9Q8mSypFs7RdjUqZt3jSbsoxIt4"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full uppercase">New Arrival</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="aspect-square rounded-lg overflow-hidden glass-card cursor-pointer border-2 border-primary">
+<img alt="Detail view" class="w-full h-full object-cover" data-alt="Close-up detail of high-fidelity headphone drivers with a brushed metal finish. The lighting is moody and dramatic, featuring deep shadows and crisp indigo highlights that accentuate the precision engineering. The background is a consistent atmospheric dark navy, maintaining a high-tech and premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuera9fM55XDM76nfN2jSS4Cvb8Es8lKt0TUEIpRqUwRWeyjj-3LuTnNyvx-cccWB7BcWhwBqi5KGUv3ksmDi6rJjUrYO7e26vFzO0MyPoKBxoRsok_oOuqpofwxoLtKMertOqyaZ4WvjJYxWJqTt4-tXDi168_ohv-T4YgfAMFFSpZra_4lBH5v4lZg_8hsI9YzsuQChzjHQTcyflhPmNsbrbd8rbZ6qgZIXa3h_08RDOZCWg6z5o4ApSlRbM8Si6YRK5n6Tm1qup"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden glass-card cursor-pointer hover:border-outline transition-colors">
+<img alt="Earcup view" class="w-full h-full object-cover" data-alt="Side profile view of premium black headphones showcasing the plush memory foam ear cushions and the sleek headband adjustment mechanism. The scene is illuminated by a subtle, cool-toned glow from the side, creating a sense of depth against the dark, slate-toned environment. The focus is sharp on the texture of the materials." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9V4JKtamLEBB6SN6mrymFQ66SQFVZJb_ZOc7s3-NeDRfz1TZZcUvEEEpAjnT5rTGjDkaOY0Dn2j22AJzIAtii9jfUfncF7bp0hBZr6eTI102zUNiJZ8mvVc2Luft-67pe4NMFB_DlQLUhCXIQ8Zo8WYr9qfb_pZDqf6dxHO-K_GIOTDNyxkxYaDurXVbx6TWcJHZRZE1HAcjKScZabgfsRtbCDCfNgUNgCReviMELZBwjM7YYh9SMo0BzzoSt2Mt6Ax45eY2vsmd3"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden glass-card cursor-pointer hover:border-outline transition-colors flex items-center justify-center bg-surface-container-highest">
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-3xl">play_circle</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Video</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Info -->
+<div class="lg:col-span-5 space-y-6">
+<div>
+<nav class="flex items-center gap-2 mb-4 font-label-sm text-label-sm text-outline">
+<span class="hover:text-primary cursor-pointer">Audio</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="hover:text-primary cursor-pointer">Headphones</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">Pro Series</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">Acoustic Pro X1 Hybrid Noise Cancelling</h2>
+<div class="flex items-center gap-4 mt-3">
+<div class="flex items-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]">star_half</span>
+<span class="ml-2 font-body-md text-body-md text-on-surface-variant">(128 reviews)</span>
+</div>
+</div>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="text-display-lg font-display-lg text-primary">$349.99</span>
+<span class="text-title-md font-title-md text-outline line-through">$420.00</span>
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded font-label-sm text-label-sm">-15%</span>
+</div>
+<div class="p-4 rounded-xl glass-card space-y-3">
+<p class="font-title-md text-title-md text-on-surface">Select Color</p>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full bg-slate-900 border-2 border-primary ring-2 ring-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-slate-600 border border-outline-variant"></button>
+<button class="w-10 h-10 rounded-full bg-indigo-900 border border-outline-variant"></button>
+</div>
+</div>
+<!-- Bento Specs Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 rounded-xl glass-card kinetic-glow transition-all">
+<span class="material-symbols-outlined text-secondary mb-2">battery_very_low</span>
+<p class="font-label-sm text-label-sm text-outline uppercase">Battery</p>
+<p class="font-title-md text-title-md text-on-surface">40 Hours</p>
+</div>
+<div class="p-4 rounded-xl glass-card kinetic-glow transition-all">
+<span class="material-symbols-outlined text-secondary mb-2">bolt</span>
+<p class="font-label-sm text-label-sm text-outline uppercase">Charging</p>
+<p class="font-title-md text-title-md text-on-surface">10m = 5h</p>
+</div>
+<div class="p-4 rounded-xl glass-card kinetic-glow transition-all">
+<span class="material-symbols-outlined text-secondary mb-2">spatial_audio</span>
+<p class="font-label-sm text-label-sm text-outline uppercase">Audio</p>
+<p class="font-title-md text-title-md text-on-surface">Lossless</p>
+</div>
+<div class="p-4 rounded-xl glass-card kinetic-glow transition-all">
+<span class="material-symbols-outlined text-secondary mb-2">noise_control_on</span>
+<p class="font-label-sm text-label-sm text-outline uppercase">ANC</p>
+<p class="font-title-md text-title-md text-on-surface">Adaptive</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Description Section -->
+<section class="mt-16 max-w-3xl">
+<h3 class="font-headline-lg text-headline-lg mb-6">Experience Sound Reimagined</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                The Acoustic Pro X1 represents the pinnacle of modern audio engineering. Designed for those who demand uncompromising quality, these headphones blend advanced noise-cancellation technology with a custom-built 40mm driver for clarity that feels alive.
+            </p>
+<div class="mt-8 space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">shield_with_heart</span>
+<div>
+<h4 class="font-title-md text-title-md">2-Year Warranty</h4>
+<p class="text-on-surface-variant">Full protection against manufacturing defects and technical issues.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">local_shipping</span>
+<div>
+<h4 class="font-title-md text-title-md">Free Express Shipping</h4>
+<p class="text-on-surface-variant">Get it delivered within 2-3 business days anywhere in the country.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Purchase Bar (Mobile Focus & Persistent) -->
+<div class="fixed bottom-0 left-0 w-full z-50 p-4 pb-8 md:pb-4 glass-card border-t border-outline-variant/30">
+<div class="max-w-container-max mx-auto flex items-center gap-4">
+<button class="hidden md:flex flex-col items-center justify-center text-outline hover:text-primary transition-colors px-4">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm text-label-sm">Wishlist</span>
+</button>
+<div class="flex-1 grid grid-cols-2 gap-4">
+<button class="bg-surface-container-highest text-on-surface font-title-md text-title-md py-4 rounded-xl border border-outline-variant hover:bg-surface-bright transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Add to Cart
+                </button>
+<button class="bg-primary-container text-on-primary-container font-title-md text-title-md py-4 rounded-xl shadow-lg shadow-primary-container/20 hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2">
+                    Buy Now
+                </button>
+</div>
+</div>
+</div>
+<!-- Navigation Shadow Element (Replicating structure for logic) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full w-20 flex-col items-center py-20 gap-8 bg-surface-container-lowest border-r border-outline-variant/10 z-40">
+<a class="text-primary font-semibold flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined bg-primary-container p-3 rounded-xl">home</span>
+<span class="font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">Home</span>
+</a>
+<a class="text-on-surface-variant flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined p-3 rounded-xl hover:bg-surface-container-high">search</span>
+<span class="font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">Search</span>
+</a>
+<a class="text-on-surface-variant flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined p-3 rounded-xl hover:bg-surface-container-high">shopping_cart</span>
+<span class="font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">Cart</span>
+</a>
+<a class="text-on-surface-variant flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined p-3 rounded-xl hover:bg-surface-container-high">person</span>
+<span class="font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">Profile</span>
+</a>
+</nav>
+<!-- Interactive Script -->
+<script>
+        // Simple micro-interaction for color selection
+        document.querySelectorAll('[class*="w-10 h-10 rounded-full"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[class*="w-10 h-10 rounded-full"]').forEach(b => {
+                    b.classList.remove('border-primary', 'ring-2', 'ring-primary/20');
+                    b.innerHTML = '';
+                });
+                this.classList.add('border-primary', 'ring-2', 'ring-primary/20');
+                this.innerHTML = '<span class="material-symbols-outlined text-primary text-[20px]">check</span>';
+            });
+        });
+
+        // Add to cart animation feedback
+        const cartBtn = document.querySelector('button:contains("Add to Cart")');
+        if (cartBtn) {
+            cartBtn.addEventListener('click', () => {
+                const originalContent = cartBtn.innerHTML;
+                cartBtn.innerHTML = '<span class="material-symbols-outlined animate-bounce">done</span> Added!';
+                setTimeout(() => {
+                    cartBtn.innerHTML = originalContent;
+                }, 2000);
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopSmart - Secure Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.65);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(129, 140, 248, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .accent-glow {
+            filter: drop-shadow(0 0 15px rgba(129, 140, 248, 0.45));
+        }
+        .input-glow:focus-within {
+            box-shadow: 0 0 12px rgba(129, 140, 248, 0.25);
+            border-color: #818cf8;
+        }
+        .role-pill-active {
+            background: #818cf8;
+            color: #101b8a;
+            box-shadow: 0 4px 12px rgba(129, 140, 248, 0.4);
+        }
+        body {
+            background-color: #0b1326;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(17, 27, 138, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(3, 198, 178, 0.08) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0b1326",
+                      "surface": "#0b1326",
+                      "surface-container": "#171f33",
+                      "surface-container-low": "#131b2e",
+                      "surface-container-high": "#222a3d",
+                      "surface-container-highest": "#2d3449",
+                      "on-background": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "on-surface-variant": "#c6c5d5",
+                      "primary": "#bdc2ff",
+                      "primary-container": "#818cf8",
+                      "on-primary": "#131e8c",
+                      "on-primary-container": "#101b8a",
+                      "secondary": "#44e2cd",
+                      "on-secondary": "#003731",
+                      "secondary-container": "#03c6b2",
+                      "outline": "#908f9e",
+                      "outline-variant": "#454653"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "2xl": "1rem",
+                      "3xl": "1.5rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "title-md": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "display-lg": ["Hanken Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="text-on-background font-body-md overflow-x-hidden flex flex-col min-h-screen justify-between">
+
+    <!-- Top Glow Header decoration -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-70"></div>
+
+    <!-- Header bar -->
+    <header class="w-full max-w-[1440px] mx-auto px-6 py-5 flex justify-between items-center z-10">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-background font-bold text-2xl">local_shipping</span>
+            </div>
+            <h1 class="font-display-lg text-2xl font-bold tracking-tight text-on-surface">ShopSmart <span class="text-xs font-mono font-medium text-secondary uppercase tracking-widest bg-secondary-container/20 border border-secondary/30 px-2 py-0.5 rounded-full ml-1.5">Portal</span></h1>
+        </div>
+        <a href="../home_screen_dark_updated_layout/code.html" class="flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+            <span>Browse Products</span>
+        </a>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-[1440px] mx-auto px-4 py-8 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 z-10 flex-grow">
+        
+        <!-- Left Side: Hero Info -->
+        <div class="w-full lg:w-1/2 flex flex-col gap-6 max-w-xl text-center lg:text-left">
+            <div class="inline-flex items-center justify-center lg:justify-start gap-2">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                <span class="font-label-sm text-secondary uppercase tracking-widest text-xs">V2.4 Secure Delivery System</span>
+            </div>
+            <h2 class="font-display-lg text-4xl lg:text-5xl font-bold text-on-surface leading-[1.1] tracking-tight">
+                One System. <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">Four Integrated Panels.</span>
+            </h2>
+            <p class="font-body-lg text-on-surface-variant text-lg">
+                Log in to securely access your dedicated workspace. Experience premium multi-vendor delivery operations, real-time analytics, and fluid order flow systems in dark comfort.
+            </p>
+            
+            <!-- Quick Features list -->
+            <div class="grid grid-cols-2 gap-4 mt-4 text-left hidden sm:grid">
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low/40 border border-outline-variant/10">
+                    <span class="material-symbols-outlined text-primary mt-0.5">verified_user</span>
+                    <div>
+                        <h4 class="font-title-md text-sm font-semibold text-on-surface">RBAC Verified</h4>
+                        <p class="text-xs text-on-surface-variant">Role-based secure access</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low/40 border border-outline-variant/10">
+                    <span class="material-symbols-outlined text-secondary mt-0.5">speed</span>
+                    <div>
+                        <h4 class="font-title-md text-sm font-semibold text-on-surface">Socket Real-time</h4>
+                        <p class="text-xs text-on-surface-variant">Instant telemetry sync</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Login Card -->
+        <div class="w-full lg:w-[480px] max-w-md">
+            <div class="glass-card rounded-3xl p-8 relative overflow-hidden">
+                
+                <!-- Inner soft gradient circle decoration -->
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="mb-6 text-center">
+                    <h3 class="font-display-lg text-2xl font-bold text-on-surface">Portal Log In</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">Select your designated platform role to log in</p>
+                </div>
+
+                <!-- Role Selector (Segmented control) -->
+                <div class="bg-surface-container-low/85 p-1 rounded-2xl border border-outline-variant/30 flex justify-between items-center mb-6">
+                    <button type="button" onclick="setRole('customer')" id="btn-customer" class="w-1/4 py-2.5 rounded-xl font-title-md text-xs font-semibold tracking-wide transition-all duration-300 role-pill-active flex flex-col items-center gap-1">
+                        <span class="material-symbols-outlined text-lg">person</span>
+                        <span>User</span>
+                    </button>
+                    <button type="button" onclick="setRole('vendor')" id="btn-vendor" class="w-1/4 py-2.5 rounded-xl font-title-md text-xs font-semibold tracking-wide transition-all duration-300 text-on-surface-variant hover:text-on-surface flex flex-col items-center gap-1">
+                        <span class="material-symbols-outlined text-lg">storefront</span>
+                        <span>Vendor</span>
+                    </button>
+                    <button type="button" onclick="setRole('delivery')" id="btn-delivery" class="w-1/4 py-2.5 rounded-xl font-title-md text-xs font-semibold tracking-wide transition-all duration-300 text-on-surface-variant hover:text-on-surface flex flex-col items-center gap-1">
+                        <span class="material-symbols-outlined text-lg">sports_motorsports</span>
+                        <span>Rider</span>
+                    </button>
+                    <button type="button" onclick="setRole('admin')" id="btn-admin" class="w-1/4 py-2.5 rounded-xl font-title-md text-xs font-semibold tracking-wide transition-all duration-300 text-on-surface-variant hover:text-on-surface flex flex-col items-center gap-1">
+                        <span class="material-symbols-outlined text-lg">shield_person</span>
+                        <span>Admin</span>
+                    </button>
+                </div>
+
+                <!-- Form -->
+                <form id="loginForm" class="flex flex-col gap-5">
+                    
+                    <!-- Hidden input to store role selection -->
+                    <input type="hidden" id="userRole" name="role" value="customer"/>
+
+                    <!-- Email Field -->
+                    <div class="flex flex-col gap-1.5">
+                        <label for="email" class="text-xs font-mono font-medium text-on-surface-variant tracking-wider uppercase ml-1">Email Address</label>
+                        <div class="input-glow flex items-center bg-surface-container-low/75 border border-outline-variant/35 rounded-xl px-4 py-3.5 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">mail</span>
+                            <input type="email" id="email" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-on-surface-variant/40" placeholder="yourname@domain.com"/>
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center px-1">
+                            <label for="password" class="text-xs font-mono font-medium text-on-surface-variant tracking-wider uppercase">Password</label>
+                            <a href="#" class="text-xs font-semibold text-primary hover:underline">Forgot password?</a>
+                        </div>
+                        <div class="input-glow flex items-center bg-surface-container-low/75 border border-outline-variant/35 rounded-xl px-4 py-3.5 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">lock</span>
+                            <input type="password" id="password" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-on-surface-variant/40" placeholder="••••••••••••"/>
+                            <button type="button" onclick="togglePassword()" class="text-on-surface-variant hover:text-on-surface select-none ml-2">
+                                <span class="material-symbols-outlined text-xl" id="pwd-icon">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terms checkbox -->
+                    <div class="flex items-center gap-2.5 px-1 mt-1">
+                        <input type="checkbox" id="remember" class="w-4 h-4 rounded bg-surface-container-low border-outline-variant/40 text-primary-container focus:ring-primary-container focus:ring-offset-background cursor-pointer"/>
+                        <label for="remember" class="text-xs text-on-surface-variant select-none cursor-pointer">Remember my device</label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn" class="w-full mt-2 py-4 rounded-xl bg-gradient-to-r from-primary-container to-secondary font-title-md text-sm font-bold text-background shadow-lg shadow-primary-container/25 hover:shadow-primary-container/35 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        <span>Authenticate</span>
+                        <span class="material-symbols-outlined text-lg" id="btn-arrow">arrow_forward</span>
+                        <div class="hidden w-5 h-5 rounded-full border-2 border-background border-t-transparent animate-spin" id="btn-spinner"></div>
+                    </button>
+
+                </form>
+
+                <!-- Demo helper credentials banner -->
+                <div class="mt-6 p-4 rounded-2xl bg-surface-container-low/80 border border-outline-variant/20 flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-base">info</span>
+                        <span class="font-label-sm text-secondary text-xs uppercase tracking-wider">Quick Demo Autofills</span>
+                    </div>
+                    <p class="text-[11px] text-on-surface-variant">Click a helper badge to instantly load mock platform credentials:</p>
+                    <div class="flex flex-wrap gap-1.5 mt-1" id="demo-badges">
+                        <!-- Badges loaded dynamically based on active selection -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Success Toast Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-card border-secondary/40 px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/40 text-secondary">
+            <span class="material-symbols-outlined text-lg font-bold">check</span>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-on-surface" id="toast-title">Success</h4>
+            <p class="text-xs text-on-surface-variant" id="toast-desc">Authenticated successfully.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-[1440px] mx-auto px-6 py-6 border-t border-outline-variant/10 text-center z-10 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <span class="text-xs font-mono text-on-surface-variant">© 2026 ShopSmart Multivendor Inc. All Rights Reserved.</span>
+        <div class="flex gap-4">
+            <a href="#" class="text-xs font-semibold text-on-surface-variant hover:text-primary">System SLA</a>
+            <span class="text-outline-variant/30 select-none text-xs">|</span>
+            <a href="#" class="text-xs font-semibold text-on-surface-variant hover:text-primary">Support API</a>
+        </div>
+    </footer>
+
+    <!-- JS Logic for Authentication and Role Selecting -->
+    <script>
+        // Mock DB accounts corresponding to each role
+        const demoAccounts = {
+            customer: {
+                email: 'customer@shopsmart.com',
+                password: 'customerPass123',
+                badgeText: 'Load Mock Customer',
+                redirect: '../home_screen_dark_updated_layout/code.html'
+            },
+            vendor: {
+                email: 'vendor_electronics@shopsmart.com',
+                password: 'vendorSecret99',
+                badgeText: 'Load Mock Vendor',
+                redirect: '#' // Placeholder
+            },
+            delivery: {
+                email: 'rider_fast@shopsmart.com',
+                password: 'riderDrive77',
+                badgeText: 'Load Mock Rider',
+                redirect: '#' // Placeholder
+            },
+            admin: {
+                email: 'admin_portal@shopsmart.com',
+                password: 'adminControl00',
+                badgeText: 'Load Mock Admin',
+                redirect: '#' // Placeholder
+            }
+        };
+
+        // Select Role function
+        function setRole(role) {
+            // Update hidden input
+            document.getElementById('userRole').value = role;
+
+            // List of roles
+            const roles = ['customer', 'vendor', 'delivery', 'admin'];
+
+            // Toggle CSS classes on role selector buttons
+            roles.forEach(r => {
+                const btn = document.getElementById('btn-' + r);
+                if (r === role) {
+                    btn.classList.add('role-pill-active');
+                    btn.classList.remove('text-on-surface-variant');
+                } else {
+                    btn.classList.remove('role-pill-active');
+                    btn.classList.add('text-on-surface-variant');
+                }
+            });
+
+            // Update email & password placeholders dynamically to nudge user
+            const emailInput = document.getElementById('email');
+            if (role === 'customer') emailInput.placeholder = 'customer@shopsmart.com';
+            else if (role === 'vendor') emailInput.placeholder = 'vendor_electronics@shopsmart.com';
+            else if (role === 'delivery') emailInput.placeholder = 'rider_fast@shopsmart.com';
+            else if (role === 'admin') emailInput.placeholder = 'admin_portal@shopsmart.com';
+
+            // Refresh quick autofill credentials badges
+            updateDemoBadges(role);
+        }
+
+        // Toggle visual visibility of input characters in password
+        function togglePassword() {
+            const pwdInput = document.getElementById('password');
+            const icon = document.getElementById('pwd-icon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                pwdInput.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        // Fill mock credentials
+        function autofill(role) {
+            document.getElementById('email').value = demoAccounts[role].email;
+            document.getElementById('password').value = demoAccounts[role].password;
+        }
+
+        // Render dynamic quick autofill badge matching active role selector
+        function updateDemoBadges(activeRole) {
+            const container = document.getElementById('demo-badges');
+            container.innerHTML = ''; // Reset
+
+            const account = demoAccounts[activeRole];
+            
+            const badge = document.createElement('button');
+            badge.type = 'button';
+            badge.onclick = () => autofill(activeRole);
+            badge.className = "px-3 py-1.5 rounded-lg bg-primary-container/20 text-primary border border-primary-container/30 text-xs font-semibold hover:bg-primary-container/30 active:scale-95 transition-all flex items-center gap-1.5";
+            badge.innerHTML = `<span class="material-symbols-outlined text-xs">key</span> <span>${account.badgeText}</span>`;
+            
+            container.appendChild(badge);
+        }
+
+        // Toast visual feedback notifier helper
+        function triggerToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-desc').textContent = desc;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+
+        // Initialize badges on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            setRole('customer');
+        });
+
+        // Form Submit flow Simulation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const role = document.getElementById('userRole').value;
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            const btn = document.getElementById('submitBtn');
+            const arrow = document.getElementById('btn-arrow');
+            const spinner = document.getElementById('btn-spinner');
+
+            // Visual loading state
+            btn.disabled = true;
+            arrow.classList.add('hidden');
+            spinner.classList.remove('hidden');
+
+            setTimeout(() => {
+                // Mock verification check (Accepts matching mock info or any credentials that are non-empty for developer test ease)
+                const mock = demoAccounts[role];
+                
+                // Revert button visual states
+                btn.disabled = false;
+                arrow.classList.remove('hidden');
+                spinner.classList.add('hidden');
+
+                // Check verification
+                if (email === mock.email && password === mock.password) {
+                    // Success triggers toast alert
+                    triggerToast("Authorized", `Welcome back! Routing you to your ${role} console...`);
+                    
+                    // Save mock status in localStorage for panel logic
+                    localStorage.setItem('currentUser', JSON.stringify({ role: role, email: email }));
+
+                    setTimeout(() => {
+                        // Redirect logic based on target files structure
+                        if (mock.redirect !== '#') {
+                            window.location.href = mock.redirect;
+                        } else {
+                            alert(`Success! Dynamic portal routing active. In an integrated application, this redirects directly to your secure "${role}" backend panels.`);
+                        }
+                    }, 1200);
+
+                } else {
+                    // Failure alerts
+                    triggerToast("Invalid Passcode", "Credentials didn't match the selected system registry.");
+                }
+
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopSmart | User Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .profile-gradient {
+            background: linear-gradient(135deg, #131e8c 0%, #4953bc 100%);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#003731",
+                    "surface-tint": "#bdc2ff",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "on-secondary-fixed": "#00201c",
+                    "surface-container-highest": "#2d3449",
+                    "on-background": "#dae2fd",
+                    "inverse-surface": "#dae2fd",
+                    "on-primary-container": "#101b8a",
+                    "primary-fixed": "#e0e0ff",
+                    "tertiary": "#f7bd3e",
+                    "on-tertiary-container": "#3e2b00",
+                    "on-primary-fixed-variant": "#2f3aa3",
+                    "on-error": "#690005",
+                    "inverse-primary": "#4953bc",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#c08d00",
+                    "surface-dim": "#0b1326",
+                    "background": "#0b1326",
+                    "surface-container-high": "#222a3d",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "on-tertiary-fixed": "#261900",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#060e20",
+                    "surface-container-low": "#131b2e",
+                    "on-primary-fixed": "#000767",
+                    "surface-container": "#171f33",
+                    "on-tertiary": "#402d00",
+                    "tertiary-fixed-dim": "#f7bd3e",
+                    "secondary-container": "#03c6b2",
+                    "inverse-on-surface": "#283044",
+                    "on-primary": "#131e8c",
+                    "on-surface": "#dae2fd",
+                    "on-surface-variant": "#c6c5d5",
+                    "secondary-fixed-dim": "#3cddc7",
+                    "tertiary-fixed": "#ffdea3",
+                    "surface": "#0b1326",
+                    "secondary-fixed": "#62fae3",
+                    "surface-bright": "#31394d",
+                    "outline": "#908f9e",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#004d44",
+                    "primary": "#bdc2ff",
+                    "outline-variant": "#454653",
+                    "on-secondary-fixed-variant": "#005047",
+                    "primary-container": "#818cf8",
+                    "secondary": "#44e2cd",
+                    "surface-variant": "#2d3449"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "title-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 dark:hover:bg-on-surface-variant/10 active:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">ShopSmart</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 dark:hover:bg-on-surface-variant/10 active:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-lg mx-auto space-y-8">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center text-center mt-4">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-tr from-primary to-secondary rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+<div class="relative w-32 h-32 rounded-full border-4 border-surface-container-high overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A sophisticated close-up portrait of a professional woman with a confident expression, set against a dark atmospheric background with subtle indigo rim lighting. The style is high-end editorial photography, featuring deep shadows and crisp details. The overall mood is focused and premium, perfectly matching a dark-mode commerce interface with professional and modern aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaTf__kSK6jOi8Vq-A6GmLr7FjkOvqCvoZBBMnBu2YONenWYbmXNyEzypQOGRGJRmkEuTD_qxRQlpoJd-j739QXcZWjJhkvr2AGf3au4js-xYi55P-JYALGEkJAlXogyGvHI90YtdHrA8Sw9asAnLP8StX3BPNNC7hHB4Xtij29fhksR0qpWCg-ZU_-dPTdtm6wYuZiRcyydyiTqJZ2vZ7_MrikZpohGlzfQNbTgU24b8UwPdyC6elbK_kCxh3g1_VqAySoKpTvxdQ"/>
+</div>
+<button class="absolute bottom-0 right-0 p-2 bg-primary-container text-on-primary-container rounded-full shadow-lg border-2 border-surface shadow-primary/20 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">edit</span>
+</button>
+</div>
+<div class="mt-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Elena Rodriguez</h2>
+<p class="font-label-sm text-label-sm text-outline uppercase mt-1 tracking-widest">Premium Member since 2022</p>
+</div>
+</section>
+<!-- Bento Stats Grid -->
+<section class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-xl p-4 flex flex-col justify-between h-32 hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<span class="font-label-sm text-label-sm text-outline">ORDERS</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary transition-colors">24</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Last order 2d ago</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 flex flex-col justify-between h-32 hover:border-secondary/50 transition-colors group">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm text-outline">CREDIT</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface group-hover:text-secondary transition-colors">$842</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Available balance</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 flex flex-col justify-between col-span-2 h-28 hover:border-tertiary/50 transition-colors group relative overflow-hidden">
+<div class="absolute right-0 top-0 w-24 h-24 bg-tertiary/5 blur-3xl rounded-full"></div>
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-sm text-label-sm text-outline">LOYALTY PROGRAM</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface">Gold Elite</span>
+<p class="font-body-md text-body-md text-on-surface-variant">250 points until Platinum</p>
+</div>
+<div class="h-2 w-32 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Menu List Section -->
+<section class="space-y-2">
+<h3 class="font-label-sm text-label-sm text-outline px-2 uppercase mb-4">Account Settings</h3>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between p-4 rounded-xl glass-card hover:bg-surface-container-high/50 active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div class="text-left">
+<p class="font-title-md text-title-md text-on-surface">Personal Information</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Name, email, phone number</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-xl glass-card hover:bg-surface-container-high/50 active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">payments</span>
+</div>
+<div class="text-left">
+<p class="font-title-md text-title-md text-on-surface">Payment Methods</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Visa **** 4421, Apple Pay</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-xl glass-card hover:bg-surface-container-high/50 active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">location_on</span>
+</div>
+<div class="text-left">
+<p class="font-title-md text-title-md text-on-surface">Shipping Addresses</p>
+<p class="font-body-md text-body-md text-on-surface-variant">3 saved locations</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-xl glass-card hover:bg-surface-container-high/50 active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error">security</span>
+</div>
+<div class="text-left">
+<p class="font-title-md text-title-md text-on-surface">Security</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Password, 2FA, Biometrics</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Logout CTA -->
+<button class="w-full py-4 px-6 rounded-xl border border-outline-variant hover:bg-error/5 hover:border-error/50 text-error flex items-center justify-center gap-2 transition-all font-title-md text-title-md active:scale-95">
+<span class="material-symbols-outlined">logout</span>
+            Sign Out
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-container-lowest/90 dark:bg-surface-container-lowest/90 backdrop-blur-lg border-t border-outline-variant/30 rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.5)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-on-surface-variant/10 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-on-surface-variant/10 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-on-surface-variant/10 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</button>
+<!-- ACTIVE: Profile -->
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl px-4 py-1.5 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let ripple = document.createElement('div');
+                ripple.classList.add('absolute', 'bg-white/20', 'rounded-full', 'animate-ping');
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.left = e.clientX - btn.getBoundingClientRect().left - 10 + 'px';
+                ripple.style.top = e.clientY - btn.getBoundingClientRect().top - 10 + 'px';
+                btn.classList.add('relative', 'overflow-hidden');
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Subtle parallax effect on mouse move for cards
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.glass-card');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            cards.forEach(card => {
+                const shiftX = (x - 0.5) * 5;
+                const shiftY = (y - 0.5) * 5;
+                card.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+            });
+        });
+    </script>
+</body></html>

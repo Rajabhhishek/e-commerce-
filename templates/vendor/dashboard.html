@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopSmart - Vendor Inventory Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.65);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(129, 140, 248, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        body {
+            background-color: #0b1326;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(17, 27, 138, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(3, 198, 178, 0.05) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0b1326",
+                      "surface": "#0b1326",
+                      "surface-container": "#171f33",
+                      "surface-container-low": "#131b2e",
+                      "surface-container-high": "#222a3d",
+                      "on-background": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "on-surface-variant": "#c6c5d5",
+                      "primary": "#bdc2ff",
+                      "primary-container": "#818cf8",
+                      "on-primary": "#131e8c",
+                      "secondary": "#44e2cd",
+                      "on-secondary": "#003731",
+                      "outline-variant": "#454653"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="text-on-background min-h-screen font-body-md overflow-x-hidden flex flex-col justify-between">
+
+    <!-- Top Glow Header decoration -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-50"></div>
+
+    <!-- Header bar -->
+    <header class="fixed top-0 left-0 w-full z-40 flex justify-between items-center px-6 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 shadow-md">
+        <div class="flex items-center gap-4">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-background font-bold text-xl">storefront</span>
+            </div>
+            <h1 class="font-headline-lg text-lg font-bold text-primary">Vendor Portal</h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-xs font-mono text-secondary bg-secondary/10 border border-secondary/20 px-2.5 py-1 rounded-full uppercase tracking-wider font-semibold">Store: {{ shop.name if shop else 'Unassigned' }}</span>
+            <a href="/auth/logout" class="p-2 rounded-full hover:bg-surface-container-high/50 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined">logout</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="pt-24 pb-12 max-w-[1000px] w-full mx-auto px-6 flex-grow flex flex-col gap-8">
+        
+        <!-- Welcome intro -->
+        <div>
+            <h2 class="font-headline-lg text-3xl font-semibold text-on-surface">Store Catalog Console</h2>
+            <p class="text-on-surface-variant text-sm mt-1">Review shop metrics and easily toggle product availability states in real time.</p>
+        </div>
+
+        <!-- System KPI metrics split by Channel -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-28 relative overflow-hidden">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">Total Shop Sales</span>
+                    <h4 class="text-2xl font-bold font-headline-lg text-secondary mt-1" id="stat-online-sales">$0.00</h4>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl"></div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-28 relative overflow-hidden">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">Completed Deliveries</span>
+                    <h4 class="text-2xl font-bold font-headline-lg text-primary mt-1" id="stat-delivered-orders">0 Done</h4>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-28 relative overflow-hidden">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">Catalog Products</span>
+                    <h4 class="text-2xl font-bold font-headline-lg text-on-surface mt-1" id="stat-catalog-count">0 Listings</h4>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-white/5 rounded-full blur-xl"></div>
+            </div>
+        </div>
+
+        <!-- FULL WIDTH Stock & Inventory Manager -->
+        <div class="w-full">
+            <div class="glass-card p-6 rounded-3xl flex flex-col gap-4">
+                <div class="flex justify-between items-center border-b border-outline-variant/30 pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-2xl">inventory_2</span>
+                        <h3 class="font-headline-lg text-lg font-bold text-on-surface">Product Stock & Availability Controller</h3>
+                    </div>
+                    <span class="text-[10px] font-mono text-on-surface-variant uppercase tracking-wider px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant/20" id="stock-list-badge">0 Items</span>
+                </div>
+
+                <!-- Stock table -->
+                <div class="overflow-x-auto min-h-[300px]">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-outline-variant/35 text-[10px] font-mono uppercase tracking-wider text-on-surface-variant">
+                                <th class="pb-3 pl-2">Product Name</th>
+                                <th class="pb-3">Availability Status</th>
+                                <th class="pb-3 pr-2 text-right">Stock Availability Toggle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            <!-- Populated dynamically -->
+                            <tr>
+                                <td colspan="3" class="py-12 text-center text-on-surface-variant font-mono text-xs">
+                                    <span class="material-symbols-outlined text-3xl mb-1 animate-spin block text-outline-variant">progress_activity</span>
+                                    Retrieving catalog registry...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Success Toast Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-card border-secondary/40 px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/40 text-secondary">
+            <span class="material-symbols-outlined text-lg font-bold">check</span>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-on-surface" id="toast-title">Success</h4>
+            <p class="text-xs text-on-surface-variant" id="toast-desc">Operation succeeded.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-[1440px] mx-auto px-6 py-6 border-t border-outline-variant/10 text-center text-xs font-mono text-on-surface-variant z-10">
+        © 2026 ShopSmart Multivendor Inc. Online Merchant Console.
+    </footer>
+
+    <!-- Interactive Client JS Script -->
+    <script>
+        // Memory variables
+        let products = [];
+
+        // Toast visual feedback
+        function triggerToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-desc').textContent = desc;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // ------------------ API SERVICES LOADERS ------------------
+
+        // Load Products lists and stock status
+        async function loadProducts() {
+            try {
+                const res = await fetch('/vendor/api/products');
+                products = await res.json();
+                
+                // Render Stock Board
+                const table = document.getElementById('inventory-table-body');
+                table.innerHTML = '';
+                
+                document.getElementById('stock-list-badge').textContent = `${products.length} Items`;
+                document.getElementById('stat-catalog-count').textContent = `${products.length} Listings`;
+
+                if (products.length === 0) {
+                    table.innerHTML = `<tr><td colspan="3" class="py-8 text-center text-on-surface-variant font-mono text-xs">No products listed in catalog.</td></tr>`;
+                    return;
+                }
+
+                products.forEach(p => {
+                    const isOutOfStock = p.stock <= 0;
+                    
+                    const row = document.createElement('tr');
+                    row.className = "border-b border-outline-variant/15 hover:bg-surface-container-high/20 transition-colors font-body-md text-sm";
+                    
+                    // Toggle Stock Action Button
+                    const actionBtn = isOutOfStock
+                        ? `<button onclick="toggleStock(${p.id}, true)" class="px-4 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-bold hover:bg-secondary-container transition-all shadow-sm active:scale-95 flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm">check_circle</span> Mark In Stock</button>`
+                        : `<button onclick="toggleStock(${p.id}, false)" class="px-4 py-2 rounded-xl bg-surface-container-high border border-outline-variant/40 text-on-surface text-xs font-semibold hover:bg-error/15 hover:text-error hover:border-error/40 transition-all active:scale-95 flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm">do_not_disturb_on</span> Mark Out of Stock</button>`;
+
+                    row.innerHTML = `
+                        <td class="py-4 pl-3 font-semibold text-on-surface">${p.name}</td>
+                        <td class="py-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider ${isOutOfStock ? 'bg-error-container/20 text-error border border-error/30' : 'bg-secondary/15 text-secondary border border-secondary/30'}">
+                                ${isOutOfStock ? 'Out of Stock' : 'In Stock'}
+                            </span>
+                        </td>
+                        <td class="py-4 text-right pr-3">${actionBtn}</td>
+                    `;
+                    table.appendChild(row);
+                });
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Toggle stock in database
+        async function toggleStock(prodId, markInStock) {
+            const targetStock = markInStock ? 20 : 0; // In Stock sets count to 20, Out of Stock sets to 0
+            
+            try {
+                const res = await fetch(`/vendor/api/product/${prodId}/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ stock: targetStock })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    triggerToast(
+                        markInStock ? "Product In Stock" : "Product Out of Stock", 
+                        `Inventory status successfully synchronized.`
+                    );
+                    loadProducts();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Load Sales Metrics only (Orders list is hidden as Admin manages it)
+        async function loadSalesMetrics() {
+            try {
+                const res = await fetch('/vendor/api/orders');
+                const orders = await res.json();
+
+                // Calculate online analytics
+                let totalOnlineSales = 0.0;
+                let deliveredOrdersCount = 0;
+
+                // Filter out any offline sales
+                const onlineOrders = orders.filter(o => !o.logs.some(l => l.description.includes('POS')));
+
+                onlineOrders.forEach(o => {
+                    if (o.status === 'DELIVERED') {
+                        totalOnlineSales += o.total_amount;
+                        deliveredOrdersCount++;
+                    }
+                });
+
+                document.getElementById('stat-online-sales').textContent = `$${totalOnlineSales.toFixed(2)}`;
+                document.getElementById('stat-delivered-orders').textContent = `${deliveredOrdersCount} Done`;
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Initialize widgets
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            loadSalesMetrics();
+        });
+    </script>
+</body>
+</html>

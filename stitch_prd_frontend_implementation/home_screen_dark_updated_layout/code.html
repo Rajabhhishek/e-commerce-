@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopSmart Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .category-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#003731",
+                      "surface-tint": "#bdc2ff",
+                      "primary-fixed-dim": "#bdc2ff",
+                      "on-secondary-fixed": "#00201c",
+                      "surface-container-highest": "#2d3449",
+                      "on-background": "#dae2fd",
+                      "inverse-surface": "#dae2fd",
+                      "on-primary-container": "#101b8a",
+                      "primary-fixed": "#e0e0ff",
+                      "tertiary": "#f7bd3e",
+                      "on-tertiary-container": "#3e2b00",
+                      "on-primary-fixed-variant": "#2f3aa3",
+                      "on-error": "#690005",
+                      "inverse-primary": "#4953bc",
+                      "error": "#ffb4ab",
+                      "tertiary-container": "#c08d00",
+                      "surface-dim": "#0b1326",
+                      "background": "#0b1326",
+                      "surface-container-high": "#222a3d",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "on-tertiary-fixed": "#261900",
+                      "error-container": "#93000a",
+                      "surface-container-lowest": "#060e20",
+                      "surface-container-low": "#131b2e",
+                      "on-primary-fixed": "#000767",
+                      "surface-container": "#171f33",
+                      "on-tertiary": "#402d00",
+                      "tertiary-fixed-dim": "#f7bd3e",
+                      "secondary-container": "#03c6b2",
+                      "inverse-on-surface": "#283044",
+                      "on-primary": "#131e8c",
+                      "on-surface": "#dae2fd",
+                      "on-surface-variant": "#c6c5d5",
+                      "secondary-fixed-dim": "#3cddc7",
+                      "tertiary-fixed": "#ffdea3",
+                      "surface": "#0b1326",
+                      "secondary-fixed": "#62fae3",
+                      "surface-bright": "#31394d",
+                      "outline": "#908f9e",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary-container": "#004d44",
+                      "primary": "#bdc2ff",
+                      "outline-variant": "#454653",
+                      "on-secondary-fixed-variant": "#005047",
+                      "primary-container": "#818cf8",
+                      "secondary": "#44e2cd",
+                      "surface-variant": "#2d3449"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "margin-desktop": "40px",
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "body-lg": ["Inter"],
+                      "title-md": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "display-lg": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">ShopSmart</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<main class="pb-24 max-w-[1440px] mx-auto">
+<!-- Hero Banner with Search Overlay -->
+<section class="relative h-[420px] mb-8 overflow-hidden">
+<img alt="Hero" class="absolute inset-0 w-full h-full object-cover" data-alt="A curated arrangement of high-end vintage electronics and futuristic metallic accessories on a deep slate-blue surface. The scene is lit with moody indigo and cyan neon lights, creating a high-tech dark mode workspace aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCxuGL0lsAoOGIUNZi8q3qxiMXtlqQoXIvY3uXlKBwFwLmhI0Awyv84HATFOOeaOIWoHuVMPZXDs5JUhxgvYWXahNSrb-4eDMex7dQ-JmkgzNsB8FeTcNf1MngTY0kREVj-ASI4O5NTk2Sd4xkjNyzjDEwWnB0mL1JQjWwAc0K1mHcdmRpUlsb6mTq9VrWVVAZCTe0hIcg4vmuEE1tlAXN8g3HTLo6J_Km9uP8Xeefcr01bD_icmSLqlhjoDsPncojwHjKL-y5_g4i"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 flex flex-col gap-6">
+<div class="max-w-xl">
+<h2 class="font-display-lg text-4xl font-bold text-on-surface mb-2 leading-tight">Elevate Your Tech Game</h2>
+<p class="font-body-lg text-on-surface-variant">Discover the future of premium audio and essential gear.</p>
+</div>
+<!-- Integrated Search Bar -->
+<div class="relative w-full max-w-2xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-14 pl-12 pr-4 rounded-xl bg-surface-container-low/90 backdrop-blur-md border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none text-on-surface" placeholder="Search for products, brands..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Grid-based Categories -->
+<section class="px-4 mb-10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-md text-title-md text-on-surface">Browse Categories</h3>
+<button class="font-label-sm text-label-sm text-primary uppercase tracking-wider">See All</button>
+</div>
+<div class="grid grid-cols-4 sm:grid-cols-6 gap-4">
+<div class="flex flex-col items-center gap-2">
+<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">laptop_mac</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tech</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">checkroom</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Fashion</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">chair</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Home</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">fitness_center</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sports</span>
+</div>
+<div class="hidden sm:flex flex-col items-center gap-2">
+<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">face</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Beauty</span>
+</div>
+<div class="hidden sm:flex flex-col items-center gap-2">
+<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">headset</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Audio</span>
+</div>
+</div>
+</section>
+<!-- Dynamic Recommended Grid (Mixed Sizes) -->
+<section class="px-4 mb-12">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-md text-title-md text-on-surface">Personalized Picks</h3>
+<span class="material-symbols-outlined text-outline">tune</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-min">
+<!-- Large Focus Card -->
+<div class="col-span-2 row-span-2 group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
+<img alt="Shoes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A pair of sleek, modern athletic sneakers featuring futuristic design elements and reflective materials. The shoes are set against a dark, atmospheric backdrop with sharp, colorful light trails in indigo and teal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-RM_AA_-yCKMjrkjPWujto6m0nTXtu5ROoAJ5GnibIw_m3KweU1daoZILogmKop5awrlCM_-ORVkQWz4RdbWBf1ziQPmLagaFzDFMoyNW6TtDnQj2Y0V8xGP0L96BHGJN9vY1EgeRkTono6Q_opgyx01TWb_d1-dmqNXd14xP83S8GcFp3gAcb34XaO-bgz9aUcOeFOKGcRslOlCWCTUnsvIjBeIWliuxvZITcGVO888MhB5X2NVWTQQAeGKry3S0-cVo5hxoCNAN"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-1 rounded uppercase">New Arrival</span>
+</div>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface">favorite</span>
+</button>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+<p class="font-label-sm text-primary mb-1">NIKE GEAR</p>
+<h4 class="font-title-md text-white font-bold text-xl">Kinetic Runners X1</h4>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-white font-bold">$129.00</span>
+<span class="text-white/60 text-sm line-through">$150.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Cards -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
+<img alt="Headphones" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Professional over-ear studio headphones with a matte black finish and subtle indigo metallic details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQG0rmKccsHKgPGjsNKBz-FT9CC6XvPxfAkMDHs3KEMomwpEnXheWaz0kolZl9G5yifjKFPWHfBB4qa7LeOH9aP8F-0hkEgV5OjAZLS5mRjvqT887PCSBfYOgdNq9Npqz8tEpl5x9hN7-1ZHVOjGdsLOIDzqdZh3bfcaapO5KfJZ-Jqg1kXW7tyAMCMydmtbLOZ8o45lbAZ28F7C9AP0QeBfqLzMHuiz3GovQOe-XGEhQbQ1xw3j5vT5MQ4LPiqVlv5KiBsJ3CLcDX"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full glass-card flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<p class="font-label-sm text-on-surface-variant mb-1">SONY AUDIO</p>
+<h5 class="font-body-md text-on-surface font-semibold mb-1 truncate">WH-1000XM5 Dark</h5>
+<span class="font-body-md text-primary font-bold">$349.00</span>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
+<img alt="Watch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A luxurious smartwatch with a dark titanium frame and a minimalist black OLED interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrxrg2BEsx7EWAYVcihXJqENm_sKDsbFMXK5-uDP9rV1YIn3QWFQnl-jpfjyDh7rItwIXzRtJgBg3PPiPWDN19LxbEBUyVOjl8dZTTvehJsIekYAlMDnu7hyLOqcFBLYXNm6HoCa8NUY0GdEOQrPkAANIjKaIlRV0BSdky5qbQ0tSD_rWqq7Jhsj75-gkbYK3P76r_uEWTjGDEADqC5hyI3h8UtEf_CyaCXqhjFICd3V236eoo9u_HU3rM3WEbQGuyTn1NcICX01et"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full glass-card flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<p class="font-label-sm text-on-surface-variant mb-1">TECH-TIME</p>
+<h5 class="font-body-md text-on-surface font-semibold mb-1 truncate">Vanguard Pro Smart</h5>
+<span class="font-body-md text-primary font-bold">$499.00</span>
+</div>
+<!-- Square Highlights in Grid -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
+<img alt="Sunglasses" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Designer matte black sunglasses with dark polarized lenses, showcased in a minimalist setting with sharp architectural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvHjCZwlv-wh-yG4b48iAkJcto4zT6yaYd9NBwFfeFykKcG9uDRRN7JjTF3CLYttey4dsyHSVOeoN1Zw-6nhCKN9xNqdCwM-rZEMEwk5DCDoUbObBa8VYOXGHztSZKCvTMWwd5t_ZIOxfAzdolwff_GTw4BU8bkRdpDB_mmKAsxHbXPGfWaQ-dvnzBq3N0g9EILCVWtg9lEmFvpvqwtZZDKQVWTuWht3xGXsilpgQ7IkAvcbxpbRgvqS0mhAxbdMNwFWdMVMTr7vAT"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full glass-card flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<p class="font-label-sm text-on-surface-variant mb-1">OPTIC LUX</p>
+<h5 class="font-body-md text-on-surface font-semibold mb-1 truncate">Eclipse Shade 400</h5>
+<span class="font-body-md text-primary font-bold">$185.00</span>
+</div>
+<div class="group relative overflow-hidden rounded-2xl bg-secondary-container/20 border border-secondary/30 p-4 flex flex-col justify-between">
+<div class="z-10">
+<span class="material-symbols-outlined text-secondary mb-1">local_offer</span>
+<h4 class="font-title-md text-on-surface text-sm">Members Only</h4>
+<p class="text-xs text-on-surface-variant">Extra 10% off checkout</p>
+</div>
+<div class="z-10 mt-2">
+<button class="text-[10px] font-bold uppercase tracking-widest text-secondary">Join Club</button>
+</div>
+<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-container-lowest/90 backdrop-blur-lg border-t border-outline-variant/30 rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.5)]">
+<!-- Active Home -->
+<div class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl px-4 py-1.5 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high cursor-pointer relative">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+<span class="absolute top-1 right-3 w-4 h-4 bg-tertiary text-on-tertiary text-[10px] flex items-center justify-center rounded-full font-bold">2</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+    // Micro-interaction for category items
+    document.querySelectorAll('.aspect-square.rounded-2xl').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.add('ring-2', 'ring-primary');
+            setTimeout(() => {
+                item.classList.remove('ring-2', 'ring-primary');
+            }, 400);
+        });
+    });
+
+    // Simple scroll parallax for glass cards
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const glassCards = document.querySelectorAll('.glass-card');
+        glassCards.forEach(card => {
+            const speed = 0.02;
+            card.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+</script>
+</body></html>
