@@ -169,33 +169,35 @@
             </div>
         </section>
 
-        <!-- Dynamic Category Chips scroll list -->
+        <!-- Dynamic Category Visual Grid -->
         <section class="flex flex-col gap-4">
-            <div class="flex justify-between items-center">
-                <h3 class="font-title-md text-xl font-bold text-on-surface">Browse Catalog</h3>
-                <span class="text-xs font-mono text-primary hover:underline cursor-pointer uppercase tracking-wider">Scroll filters</span>
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="font-title-md text-xl font-bold text-on-surface">Browse Categories</h3>
             </div>
             
-            <!-- Category Chips dynamic scrolling wrapper -->
-            <div class="category-scroll flex items-center gap-3 overflow-x-auto pb-2" id="category-chips-container">
-                <button onclick="filterByCategory(null)" class="category-chip px-5 py-2.5 rounded-full bg-primary text-background border border-primary/20 text-xs font-bold transition-all hover:brightness-115 shrink-0 flex items-center gap-2" id="cat-all">
-                    <span class="material-symbols-outlined text-sm font-bold">grid_view</span>
-                    <span>All Items</span>
-                </button>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {% for cat in categories %}
-                <button onclick="filterByCategory({{ cat.id }}, this)" class="category-chip px-5 py-2.5 rounded-full bg-surface-container border border-outline-variant/40 hover:border-primary/40 text-on-surface-variant hover:text-on-surface text-xs font-semibold transition-all shrink-0 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-sm">
-                        {% if cat.name == 'Tech' %}laptop_mac
-                        {% elif cat.name == 'Fashion' %}checkroom
-                        {% elif cat.name == 'Home' %}chair
-                        {% elif cat.name == 'Sports' %}fitness_center
-                        {% elif cat.name == 'Beauty' %}face
-                        {% elif cat.name == 'Audio' %}headset
-                        {% else %}category
-                        {% endif %}
-                    </span>
-                    <span>{{ cat.name }}</span>
-                </button>
+                <a href="/category/{{ cat.id }}" class="relative h-40 md:h-48 rounded-2xl overflow-hidden group border border-outline-variant/30 shadow-lg cursor-pointer">
+                    <!-- Dynamic image mapping based on category name -->
+                    {% if cat.name == 'Grocery' %}
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80" alt="Grocery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                    {% elif cat.name == 'Medical' %}
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80" alt="Medical" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                    {% elif cat.name == 'Cake' %}
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="Cake" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                    {% elif cat.name == 'Daily Need' %}
+                    <img src="https://images.unsplash.com/photo-1628102491629-77858d4af5f8?auto=format&fit=crop&w=400&q=80" alt="Daily Need" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                    {% else %}
+                    <div class="absolute inset-0 w-full h-full bg-surface-container-high group-hover:bg-surface-container-highest transition-colors"></div>
+                    {% endif %}
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    
+                    <div class="absolute bottom-4 left-4">
+                        <h4 class="text-white font-headline-lg text-lg font-bold">{{ cat.name }}</h4>
+                        <span class="text-xs text-on-surface-variant font-mono">{{ cat.description }}</span>
+                    </div>
+                </a>
                 {% endfor %}
             </div>
         </section>
@@ -257,9 +259,9 @@
             <span class="material-symbols-outlined text-[20px] font-bold">home</span>
             <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Home</span>
         </a>
-        <a href="/pharmacy" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
-            <span class="material-symbols-outlined text-[20px]">medical_services</span>
-            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span>
+        <a onclick="window.scrollTo({top: 400, behavior: 'smooth'});" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">category</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Categories</span>
         </a>
         <a onclick="document.getElementById('product-search-input').focus(); window.scrollTo({top: 150, behavior: 'smooth'});" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
             <span class="material-symbols-outlined text-[20px]">search</span>

@@ -131,6 +131,7 @@ class Order(db.Model):
         return {
             'id': self.id,
             'customer_id': self.customer_id,
+            'customer_username': self.customer.username if self.customer else "Unknown",
             'shop_id': self.shop_id,
             'total_amount': self.total_amount,
             'gst_amount': self.gst_amount,
@@ -156,6 +157,7 @@ class OrderItem(db.Model):
             'id': self.id,
             'order_id': self.order_id,
             'product_id': self.product_id,
+            'product_name': self.product.name if self.product else "Unknown Product",
             'quantity': self.quantity,
             'price': self.price
         }

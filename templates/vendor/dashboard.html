@@ -139,6 +139,33 @@
 
         </div>
 
+        <!-- FULL WIDTH Incoming & Active Orders Processor -->
+        <div class="w-full">
+            <div class="premium-glass p-6 rounded-3xl flex flex-col gap-6">
+                <!-- Orders header bar -->
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-outline-variant/30 pb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary-container text-2xl">receipt_long</span>
+                        <h3 class="font-headline-lg text-lg font-bold text-on-surface">Incoming &amp; Active Orders Processor</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-mono text-tertiary bg-tertiary/10 border border-tertiary/20 px-3 py-1 rounded-full font-semibold" id="stat-pending-badge">0 Pending</span>
+                        <span class="text-xs font-mono text-primary bg-primary-container/10 border border-primary-container/20 px-3 py-1 rounded-full font-semibold" id="stat-active-badge">0 Active</span>
+                    </div>
+                </div>
+
+                <!-- Orders Container -->
+                <div class="min-h-[120px]">
+                    <div id="orders-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="col-span-1 md:col-span-2 py-12 text-center text-on-surface-variant font-mono text-xs">
+                            <span class="material-symbols-outlined text-3xl mb-2 animate-spin block text-outline-variant">progress_activity</span>
+                            Syncing active order pipelines...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- FULL WIDTH Stock & Inventory Manager -->
         <div class="w-full">
             <div class="premium-glass p-6 rounded-3xl flex flex-col gap-6">
@@ -150,10 +177,15 @@
                         <h3 class="font-headline-lg text-lg font-bold text-on-surface">Product Stock & Availability Controller</h3>
                     </div>
                     
-                    <!-- Dynamic Search Filter for Inventory -->
-                    <div class="search-glow flex items-center bg-surface-container-low border border-outline-variant/50 rounded-xl px-3.5 py-1.5 transition-all max-w-xs w-full">
-                        <span class="material-symbols-outlined text-on-surface-variant mr-2.5 text-lg">search</span>
-                        <input id="inventory-search-input" class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-xs placeholder:text-on-surface-variant/40 outline-none" placeholder="Search catalog items..." type="text"/>
+                    <!-- Action & Filter -->
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <div class="search-glow flex items-center bg-surface-container-low border border-outline-variant/50 rounded-xl px-3.5 py-1.5 transition-all w-full sm:w-64">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-2.5 text-lg">search</span>
+                            <input id="inventory-search-input" class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-xs placeholder:text-on-surface-variant/40 outline-none" placeholder="Search catalog..." type="text"/>
+                        </div>
+                        <button onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-primary-container text-on-primary text-xs font-bold hover:brightness-105 transition-all shadow shadow-primary-container/20 flex items-center gap-1.5 whitespace-nowrap">
+                            <span class="material-symbols-outlined text-sm">add</span> New Item
+                        </button>
                     </div>
                 </div>
 
@@ -162,9 +194,10 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="border-b border-outline-variant/35 text-[10px] font-mono uppercase tracking-wider text-on-surface-variant">
-                                <th class="pb-3 pl-3">Catalog Item</th>
+                                <th class="pb-3 pl-3 w-1/3">Catalog Item</th>
+                                <th class="pb-3">Rate</th>
                                 <th class="pb-3">Status State</th>
-                                <th class="pb-3 pr-3 text-right">Administrative Toggle Action</th>
+                                <th class="pb-3 pr-3 text-right">Administrative Actions</th>
                             </tr>
                         </thead>
                         <tbody id="inventory-table-body">
@@ -181,6 +214,49 @@
         </div>
 
     </main>
+
+    <!-- Add Item Modal -->
+    <div id="add-item-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="premium-glass p-8 rounded-3xl w-full max-w-md transform scale-95 transition-transform duration-300" id="add-item-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-headline-lg text-xl font-bold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary-container">add_circle</span> Add Catalog Item
+                </h3>
+                <button onclick="closeAddModal()" class="text-on-surface-variant hover:text-error transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <form id="add-item-form" class="flex flex-col gap-4" onsubmit="submitAddProduct(event)">
+                <div>
+                    <label class="text-xs font-mono uppercase tracking-wider text-on-surface-variant font-semibold mb-1 block">Item Name</label>
+                    <input type="text" id="add-name" required class="w-full bg-surface-container-low border border-outline-variant/50 rounded-xl px-4 py-2.5 text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="e.g. Paracetamol 500mg" />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-mono uppercase tracking-wider text-on-surface-variant font-semibold mb-1 block">Rate (₹)</label>
+                        <input type="number" step="0.01" id="add-price" required class="w-full bg-surface-container-low border border-outline-variant/50 rounded-xl px-4 py-2.5 text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="0.00" />
+                    </div>
+                    <div>
+                        <label class="text-xs font-mono uppercase tracking-wider text-on-surface-variant font-semibold mb-1 block">Initial Stock</label>
+                        <input type="number" id="add-stock" required class="w-full bg-surface-container-low border border-outline-variant/50 rounded-xl px-4 py-2.5 text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="20" value="20" />
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-mono uppercase tracking-wider text-on-surface-variant font-semibold mb-1 block">Category</label>
+                    <select id="add-category" required class="w-full bg-surface-container-low border border-outline-variant/50 rounded-xl px-4 py-2.5 text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all">
+                        <option value="">Loading Categories...</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-mono uppercase tracking-wider text-on-surface-variant font-semibold mb-1 block">Description (Optional)</label>
+                    <textarea id="add-description" rows="2" class="w-full bg-surface-container-low border border-outline-variant/50 rounded-xl px-4 py-2.5 text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Brief details about the item..."></textarea>
+                </div>
+                <button type="submit" class="mt-2 w-full py-3 rounded-xl bg-primary-container text-on-primary font-bold hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">done</span> Publish to Catalog
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- Success Toast Container -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 premium-glass border-secondary/40 px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
@@ -201,6 +277,7 @@
     <!-- Interactive Client JS Script -->
     <script>
         let products = [];
+        let categories = [];
 
         function triggerToast(title, desc) {
             const toast = document.getElementById('toast');
@@ -243,17 +320,32 @@
                 row.className = "border-b border-outline-variant/15 hover:bg-surface-container-high/30 transition-all duration-300 font-body-md text-sm group";
                 
                 // Toggle Button rendering
-                const actionBtn = isOutOfStock
-                    ? `<button onclick="toggleStock(${p.id}, true)" class="px-4 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-bold hover:brightness-105 transition-all shadow shadow-secondary/15 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer ml-auto"><span class="material-symbols-outlined text-sm font-bold">check_circle</span> Mark In Stock</button>`
-                    : `<button onclick="toggleStock(${p.id}, false)" class="px-4 py-2 rounded-xl bg-surface-container-high border border-outline-variant/50 text-on-surface hover:border-error hover:bg-error/5 hover:text-error text-xs font-semibold transition-all active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer ml-auto"><span class="material-symbols-outlined text-sm">do_not_disturb_on</span> Mark Out</button>`;
+                const stockBtn = isOutOfStock
+                    ? `<button onclick="toggleStock(${p.id}, true)" class="px-3 py-1.5 rounded-lg bg-secondary/90 text-on-secondary text-[11px] font-bold hover:bg-secondary transition-all flex items-center gap-1" title="Mark In Stock"><span class="material-symbols-outlined text-[14px]">check_circle</span></button>`
+                    : `<button onclick="toggleStock(${p.id}, false)" class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 text-on-surface hover:border-error hover:text-error text-[11px] font-semibold transition-all flex items-center gap-1" title="Mark Out of Stock"><span class="material-symbols-outlined text-[14px]">do_not_disturb_on</span></button>`;
+
+                const actionBtn = `
+                    <div class="flex items-center justify-end gap-2">
+                        <button onclick="promptEditRate(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price})" class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 text-on-surface hover:border-tertiary hover:text-tertiary text-[11px] font-semibold transition-all flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">edit_square</span> Rate
+                        </button>
+                        ${stockBtn}
+                    </div>
+                `;
 
                 row.innerHTML = `
                     <td class="py-4.5 pl-3 font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-3">
                         <span class="w-1.5 h-1.5 rounded-full ${isOutOfStock ? 'bg-error shadow shadow-error' : 'bg-secondary shadow shadow-secondary'}"></span>
-                        <span>${p.name}</span>
+                        <div class="flex flex-col">
+                            <span class="truncate max-w-[150px] sm:max-w-xs">${p.name}</span>
+                            <span class="text-[10px] font-mono text-on-surface-variant/70">Stock: ${p.stock}</span>
+                        </div>
+                    </td>
+                    <td class="py-4.5 font-mono text-on-surface font-semibold">
+                        ₹${p.price.toFixed(2)}
                     </td>
                     <td class="py-4.5">
-                        <span class="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${isOutOfStock ? 'bg-error/10 text-error border border-error/20' : 'bg-secondary/10 text-secondary border border-secondary/20'}">
+                        <span class="px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider ${isOutOfStock ? 'bg-error/10 text-error border border-error/20' : 'bg-secondary/10 text-secondary border border-secondary/20'}">
                             ${isOutOfStock ? 'Out of Stock' : 'In Stock'}
                         </span>
                     </td>
@@ -275,6 +367,95 @@
                 document.getElementById('last-sync-time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             } catch (err) {
                 console.error("Products registry loading failure: ", err);
+            }
+        }
+
+        async function loadCategories() {
+            try {
+                const res = await fetch('/vendor/api/categories');
+                categories = await res.json();
+                const sel = document.getElementById('add-category');
+                sel.innerHTML = '<option value="">Select Category</option>';
+                categories.forEach(c => {
+                    sel.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+                });
+            } catch (err) {
+                console.error("Categories loading failure: ", err);
+            }
+        }
+
+        // Add Product Modal Controls
+        function openAddModal() {
+            const modal = document.getElementById('add-item-modal');
+            const content = document.getElementById('add-item-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+            if(categories.length === 0) loadCategories();
+        }
+
+        function closeAddModal() {
+            const modal = document.getElementById('add-item-modal');
+            const content = document.getElementById('add-item-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            document.getElementById('add-item-form').reset();
+        }
+
+        async function submitAddProduct(e) {
+            e.preventDefault();
+            const payload = {
+                name: document.getElementById('add-name').value,
+                price: parseFloat(document.getElementById('add-price').value),
+                stock: parseInt(document.getElementById('add-stock').value),
+                category_id: parseInt(document.getElementById('add-category').value),
+                description: document.getElementById('add-description').value
+            };
+
+            try {
+                const res = await fetch('/vendor/api/product/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    triggerToast("Item Added", `${payload.name} is now in catalog.`);
+                    closeAddModal();
+                    loadProducts();
+                } else {
+                    triggerToast("Error", data.message);
+                }
+            } catch(err) {
+                console.error(err);
+            }
+        }
+
+        async function promptEditRate(prodId, prodName, currentRate) {
+            const newRateStr = prompt(`Update rate for "${prodName}":`, currentRate);
+            if(newRateStr === null) return;
+            const newRate = parseFloat(newRateStr);
+            if(isNaN(newRate) || newRate < 0) {
+                triggerToast("Invalid Rate", "Please enter a valid positive number.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`/vendor/api/product/${prodId}/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ price: newRate })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    triggerToast("Rate Updated", `${prodName} is now ₹${newRate.toFixed(2)}.`);
+                    loadProducts();
+                } else {
+                    triggerToast("Error", data.message);
+                }
+            } catch(err) {
+                console.error(err);
             }
         }
 
@@ -301,7 +482,182 @@
             }
         }
 
-        // Load Sales Metrics only (Orders list is hidden as Admin manages it)
+        let activeOrders = [];
+
+        async function loadOrders() {
+            try {
+                const res = await fetch('/vendor/api/orders');
+                activeOrders = await res.json();
+                renderOrdersList();
+
+                const pendingOrders = activeOrders.filter(o => o.status === 'PENDING');
+                const activeProcessingOrders = activeOrders.filter(o => o.status === 'ACCEPTED' || o.status === 'READY_FOR_PICKUP' || o.status === 'OUT_FOR_DELIVERY');
+
+                document.getElementById('stat-pending-badge').textContent = `${pendingOrders.length} Pending`;
+                document.getElementById('stat-active-badge').textContent = `${activeProcessingOrders.length} Active`;
+            } catch (err) {
+                console.error("Orders sync failure: ", err);
+            }
+        }
+
+        function renderOrdersList() {
+            const container = document.getElementById('orders-container');
+            container.innerHTML = '';
+
+            // Filter out POS physical cash sales
+            const onlineOrders = activeOrders.filter(o => !o.logs.some(l => l.description.includes('POS')));
+
+            if (onlineOrders.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-1 md:col-span-2 py-12 text-center text-on-surface-variant font-mono text-xs">
+                        <span class="material-symbols-outlined text-3xl mb-2 text-outline-variant">check_circle</span>
+                        No active online orders received yet.
+                    </div>
+                `;
+                return;
+            }
+
+            onlineOrders.forEach(o => {
+                const orderCard = document.createElement('div');
+                orderCard.className = "premium-glass p-5 rounded-2xl border border-outline-variant/35 flex flex-col justify-between gap-4 hover:border-primary-container/45 transition-all duration-300 relative overflow-hidden group";
+
+                // Format status badge
+                let statusBadge = '';
+                let actionSection = '';
+
+                switch (o.status) {
+                    case 'PENDING':
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-tertiary/15 text-tertiary border border-tertiary/25">Pending Action</span>`;
+                        actionSection = `
+                            <div class="flex gap-2.5 mt-2">
+                                <button onclick="processOrder(${o.id}, 'ACCEPT')" class="flex-1 px-3 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-bold hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                    <span class="material-symbols-outlined text-sm font-bold">check</span> Accept
+                                </button>
+                                <button onclick="processOrder(${o.id}, 'DECLINE')" class="px-3 py-2 rounded-xl bg-surface-container border border-outline-variant/50 hover:border-error hover:bg-error/5 hover:text-error text-xs font-semibold active:scale-95 transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                    <span class="material-symbols-outlined text-sm">close</span> Decline
+                                </button>
+                            </div>
+                        `;
+                        break;
+                    case 'ACCEPTED':
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-primary-container/15 text-primary border border-primary-container/25">Preparing</span>`;
+                        actionSection = `
+                            <button onclick="markOrderReady(${o.id})" class="w-full mt-2 px-3 py-2 rounded-xl bg-primary-container text-on-primary text-xs font-bold hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span class="material-symbols-outlined text-sm font-bold">local_shipping</span> Mark Ready for Pickup
+                            </button>
+                        `;
+                        break;
+                    case 'READY_FOR_PICKUP':
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-secondary/15 text-secondary border border-secondary/25">Ready for Pickup</span>`;
+                        actionSection = `<p class="text-[11px] font-mono text-secondary mt-1 text-center bg-secondary/5 border border-secondary/10 py-1.5 rounded-lg flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm animate-pulse">hourglass_empty</span> Awaiting Rider Pickup</p>`;
+                        break;
+                    case 'OUT_FOR_DELIVERY':
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-blue-400/15 text-blue-400 border border-blue-400/25">In Transit</span>`;
+                        actionSection = `<p class="text-[11px] font-mono text-blue-400 mt-1 text-center bg-blue-400/5 border border-blue-400/10 py-1.5 rounded-lg flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm animate-bounce">electric_moped</span> Out with Rider</p>`;
+                        break;
+                    case 'DELIVERED':
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-green-400/15 text-green-400 border border-green-400/25">Delivered</span>`;
+                        actionSection = `<p class="text-[11px] font-mono text-green-400 mt-1 text-center bg-green-400/5 border border-green-400/10 py-1.5 rounded-lg flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm font-bold">check_circle</span> Order Handover Complete</p>`;
+                        break;
+                    case 'CANCELLED':
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-error/15 text-error border border-error/25">Cancelled</span>`;
+                        actionSection = `<p class="text-[11px] font-mono text-error mt-1 text-center bg-error/5 border border-error/10 py-1.5 rounded-lg flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm">cancel</span> Order Terminated</p>`;
+                        break;
+                    default:
+                        statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/10 text-on-surface-variant border border-outline-variant/30">${o.status}</span>`;
+                }
+
+                // Render items
+                const itemsHtml = o.items.map(item => `
+                    <div class="flex justify-between items-center text-xs font-body-md py-1 border-b border-outline-variant/10 last:border-0">
+                        <span class="text-on-surface-variant">${item.product_name || 'Product'} <span class="text-primary font-bold font-mono">x${item.quantity}</span></span>
+                        <span class="font-mono text-on-surface font-semibold">₹${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                `).join('');
+
+                const orderDate = new Date(o.created_at).toLocaleString([], { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+
+                orderCard.innerHTML = `
+                    <div class="flex flex-col gap-2.5">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-headline-lg font-bold text-on-surface flex items-center gap-2 text-sm">
+                                    Order #${o.id}
+                                    ${statusBadge}
+                                </h4>
+                                <p class="text-[10px] font-mono text-on-surface-variant/70 mt-0.5 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[10px]">schedule</span> ${orderDate}
+                                    <span class="text-outline-variant">•</span>
+                                    <span class="material-symbols-outlined text-[10px]">person</span> ${o.customer_username}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="h-[1px] bg-outline-variant/25 w-full"></div>
+
+                        <div class="flex flex-col gap-0.5 max-h-32 overflow-y-auto custom-scrollbar">
+                            ${itemsHtml}
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <div class="flex justify-between items-center bg-surface-container-low/40 border border-outline-variant/15 p-2.5 rounded-xl text-xs">
+                            <span class="font-semibold text-on-surface-variant text-[10px] font-mono uppercase">Grand Total</span>
+                            <span class="font-bold font-headline-lg text-secondary text-sm">₹${o.total_amount.toFixed(2)}</span>
+                        </div>
+
+                        ${actionSection}
+                    </div>
+                `;
+                container.appendChild(orderCard);
+            });
+        }
+
+        async function processOrder(orderId, action) {
+            try {
+                const res = await fetch(`/vendor/api/order/${orderId}/action`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: action })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    triggerToast(
+                        action === 'ACCEPT' ? "Order Accepted" : "Order Declined", 
+                        `Fulfillment timeline initiated successfully.`
+                    );
+                    loadOrders();
+                    loadSalesMetrics();
+                } else {
+                    triggerToast("Error", data.message);
+                }
+            } catch (err) {
+                console.error("Order action call error: ", err);
+            }
+        }
+
+        async function markOrderReady(orderId) {
+            try {
+                const res = await fetch(`/vendor/api/order/${orderId}/ready`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    triggerToast(
+                        "Packed & Ready", 
+                        `Assigned system riders alerted.`
+                    );
+                    loadOrders();
+                    loadSalesMetrics();
+                } else {
+                    triggerToast("Error", data.message);
+                }
+            } catch (err) {
+                console.error("Ready action call error: ", err);
+            }
+        }
+
         async function loadSalesMetrics() {
             try {
                 const res = await fetch('/vendor/api/orders');
@@ -330,11 +686,13 @@
         // Initialize console widgets
         window.addEventListener('DOMContentLoaded', () => {
             loadProducts();
+            loadOrders();
             loadSalesMetrics();
             
             // Set periodic polling loop for auto sync
             setInterval(() => {
                 loadProducts();
+                loadOrders();
                 loadSalesMetrics();
             }, 10000);
         });
