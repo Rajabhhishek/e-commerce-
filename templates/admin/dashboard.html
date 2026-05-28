@@ -9,10 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
+        .premium-glass {
+            background: rgba(13, 20, 38, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(129, 140, 248, 0.18);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        body {
+            background-color: #050a17;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(68, 226, 205, 0.06) 0px, transparent 50%);
+            min-height: 100vh;
         }
     </style>
     <script id="tailwind-config">
@@ -21,20 +30,24 @@
           theme: {
             extend: {
               "colors": {
-                      "background": "#0b1326",
-                      "surface": "#0b1326",
-                      "surface-container": "#171f33",
-                      "surface-container-low": "#131b2e",
-                      "surface-container-high": "#222a3d",
+                      "background": "#050a17",
+                      "surface": "#0d1426",
+                      "surface-container": "#111a30",
+                      "surface-container-low": "#090f1d",
+                      "surface-container-high": "#1a2540",
+                      "surface-container-highest": "#223154",
                       "on-background": "#dae2fd",
                       "on-surface": "#dae2fd",
-                      "on-surface-variant": "#c6c5d5",
+                      "on-surface-variant": "#94a3b8",
                       "primary": "#bdc2ff",
                       "primary-container": "#818cf8",
                       "on-primary": "#131e8c",
                       "secondary": "#44e2cd",
                       "on-secondary": "#003731",
-                      "outline-variant": "#454653"
+                      "tertiary": "#f7bd3e",
+                      "outline": "#475569",
+                      "outline-variant": "#334155",
+                      "error": "#f87171"
               },
               "fontFamily": {
                       "body-md": ["Inter"],
@@ -46,84 +59,110 @@
         }
     </script>
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden flex flex-col justify-between">
-    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30">
-        <div class="flex items-center gap-4">
-            <span class="material-symbols-outlined text-primary text-2xl">shield_person</span>
-            <h1 class="font-headline-lg text-lg font-bold text-primary">Admin Console</h1>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden flex flex-col justify-between selection:bg-primary-container/30 selection:text-primary">
+
+    <!-- Top Glow Header decoration -->
+    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-container/50 to-transparent"></div>
+
+    <!-- Header bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container/85 backdrop-blur-md border-b border-outline-variant/35 shadow-md">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center shadow-lg shadow-primary-container/15 group cursor-pointer hover:scale-105 transition-transform duration-300">
+                <span class="material-symbols-outlined text-background font-bold text-xl group-hover:rotate-12 transition-transform">shield_person</span>
+            </div>
+            <h1 class="font-headline-lg text-lg font-bold text-primary flex items-center gap-2">
+                Admin Console
+                <span class="text-[9px] font-mono font-bold text-secondary uppercase tracking-widest bg-secondary/15 border border-secondary/25 px-2.5 py-0.5 rounded-full">HQ Node</span>
+            </h1>
         </div>
-        <a href="/auth/logout" class="p-2 rounded-full hover:bg-surface-container-high/50 text-on-surface-variant hover:text-primary transition-colors">
-            <span class="material-symbols-outlined">logout</span>
-        </a>
+        <div class="flex items-center gap-4">
+            <span class="text-xs font-mono text-secondary bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">HQ Operational</span>
+            <a href="/auth/logout" class="p-2 rounded-xl hover:bg-surface-container-high/60 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined">logout</span>
+            </a>
+        </div>
     </header>
 
-    <main class="pt-24 pb-12 max-w-[1440px] w-full mx-auto px-6 flex-grow">
-        <div class="flex flex-col gap-6">
+    <main class="pt-24 pb-16 max-w-[1000px] w-full mx-auto px-6 flex-grow flex flex-col gap-8">
+        
+        <!-- Welcome intro -->
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
             <div>
-                <h2 class="font-headline-lg text-3xl font-semibold">Global System KPI</h2>
-                <p class="text-on-surface-variant text-sm mt-1">Monitor multi-vendor transactions, taxes, and registrations.</p>
+                <h2 class="font-headline-lg text-3xl font-bold tracking-tight text-on-surface">Global System Metrics</h2>
+                <p class="text-on-surface-variant text-sm mt-1">Audit federated transactions, GST cuts, platform revenue, and store networks.</p>
+            </div>
+        </div>
+
+        <!-- KPIs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="premium-glass p-5 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-on-surface-variant font-semibold">Total Revenue flow</span>
+                    <h4 class="text-xl font-bold font-headline-lg text-on-surface mt-2 transition-all duration-300" id="stat-revenue">₹0.00</h4>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-white/5 rounded-full blur-xl"></div>
+            </div>
+            
+            <div class="premium-glass p-5 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-on-surface-variant font-semibold">GST Collections</span>
+                    <h4 class="text-xl font-bold font-headline-lg text-primary mt-2 transition-all duration-300" id="stat-gst">₹0.00</h4>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
             </div>
 
-            <!-- KPIs -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
-                    <div>
-                        <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">Global Sales Volume</span>
-                        <h4 class="text-2xl font-bold font-headline-lg text-on-surface mt-1" id="stat-revenue">$0.00</h4>
-                    </div>
-                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl"></div>
+            <div class="premium-glass p-5 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-on-surface-variant font-semibold">10% Platform commission</span>
+                    <h4 class="text-xl font-bold font-headline-lg text-secondary mt-2 transition-all duration-300" id="stat-commission">₹0.00</h4>
                 </div>
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
-                    <div>
-                        <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">GST Tax Collection</span>
-                        <h4 class="text-2xl font-bold font-headline-lg text-primary mt-1" id="stat-gst">$0.00</h4>
-                    </div>
-                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
-                </div>
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
-                    <div>
-                        <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">10% Platform Revenue</span>
-                        <h4 class="text-2xl font-bold font-headline-lg text-secondary mt-1" id="stat-commission">$0.00</h4>
-                    </div>
-                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-secondary/15 rounded-full blur-xl"></div>
-                </div>
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
-                    <div>
-                        <span class="text-xs font-mono uppercase tracking-wider text-on-surface-variant">Fulfill Rate</span>
-                        <h4 class="text-2xl font-bold font-headline-lg text-on-surface mt-1" id="stat-orders">0 / 0</h4>
-                    </div>
-                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-white/5 rounded-full blur-xl"></div>
-                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-secondary/15 rounded-full blur-xl"></div>
             </div>
 
-            <!-- Table section -->
-            <div class="glass-card p-6 rounded-3xl mt-2">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-headline-lg text-lg font-bold">Registered Shops (Vendor Approvals)</h3>
-                    <span class="material-symbols-outlined text-outline">tune</span>
+            <div class="premium-glass p-5 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-on-surface-variant font-semibold">Fulfillment Rate</span>
+                    <h4 class="text-xl font-bold font-headline-lg text-on-surface mt-2 transition-all duration-300" id="stat-orders">0 / 0</h4>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-white/5 rounded-full blur-xl"></div>
+            </div>
+
+        </div>
+
+        <!-- Table section -->
+        <div class="w-full">
+            <div class="premium-glass p-6 rounded-3xl flex flex-col gap-6">
+                
+                <div class="flex justify-between items-center border-b border-outline-variant/30 pb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary text-2xl">local_mall</span>
+                        <h3 class="font-headline-lg text-lg font-bold text-on-surface">Registered Stores Directory</h3>
+                    </div>
+                    <span class="text-[10px] font-mono text-on-surface-variant bg-surface-container-high border border-outline-variant/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold">System Approved</span>
                 </div>
                 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-outline-variant/35 text-xs font-mono uppercase tracking-wider text-on-surface-variant">
-                                <th class="pb-3 pl-2">Shop ID</th>
+                            <tr class="border-b border-outline-variant/35 text-[10px] font-mono uppercase tracking-wider text-on-surface-variant">
+                                <th class="pb-3 pl-3">Store ID</th>
                                 <th class="pb-3">Name</th>
                                 <th class="pb-3">Owner UID</th>
-                                <th class="pb-3">Status</th>
-                                <th class="pb-3 pr-2 text-right">Verification</th>
+                                <th class="pb-3">Verification status</th>
+                                <th class="pb-3 pr-3 text-right">Integrity Status</th>
                             </tr>
                         </thead>
                         <tbody id="shops-body">
-                            <tr class="border-b border-outline-variant/15 hover:bg-surface-container-high/20 transition-colors">
-                                <td class="py-4 pl-2 font-mono text-xs font-semibold text-primary">#SHP-001</td>
-                                <td class="py-4 text-sm font-semibold text-on-surface">Kinetic Electronics Lab</td>
-                                <td class="py-4 text-sm font-mono text-on-surface-variant">UID-002 (TechMerchant)</td>
-                                <td class="py-4">
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary/15 text-secondary border border-secondary/30">approved</span>
+                            <tr class="border-b border-outline-variant/15 hover:bg-surface-container-high/30 transition-all duration-300 font-body-md text-sm group">
+                                <td class="py-4.5 pl-3 font-mono text-xs font-semibold text-primary">#SHP-001</td>
+                                <td class="py-4.5 font-bold text-on-surface">Kinetic Electronics Lab</td>
+                                <td class="py-4.5 font-mono text-on-surface-variant">UID-002 (TechMerchant)</td>
+                                <td class="py-4.5">
+                                    <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-secondary/15 text-secondary border border-secondary/20">approved</span>
                                 </td>
-                                <td class="py-4 pr-2 text-right">
-                                    <span class="text-xs text-on-surface-variant font-semibold select-none">Verified ✓</span>
+                                <td class="py-4.5 pr-3 text-right">
+                                    <span class="text-xs text-secondary font-bold font-mono">VERIFIED NODE ✓</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -134,7 +173,7 @@
     </main>
 
     <footer class="w-full max-w-[1440px] mx-auto px-6 py-6 border-t border-outline-variant/10 text-center text-xs font-mono text-on-surface-variant">
-        © 2026 ShopSmart Multivendor Inc. Platform Administration.
+        © 2026 ShopSmart Multivendor Federated Inc. Administrative Console.
     </footer>
 
     <script>
@@ -145,13 +184,13 @@
                 
                 if (data.success) {
                     const kpi = data.analytics;
-                    document.getElementById('stat-revenue').textContent = `$${kpi.total_revenue.toFixed(2)}`;
-                    document.getElementById('stat-gst').textContent = `$${kpi.total_gst.toFixed(2)}`;
-                    document.getElementById('stat-commission').textContent = `$${kpi.net_platform_commission.toFixed(2)}`;
+                    document.getElementById('stat-revenue').textContent = `₹${kpi.total_revenue.toFixed(2)}`;
+                    document.getElementById('stat-gst').textContent = `₹${kpi.total_gst.toFixed(2)}`;
+                    document.getElementById('stat-commission').textContent = `₹${kpi.net_platform_commission.toFixed(2)}`;
                     document.getElementById('stat-orders').textContent = `${kpi.delivered_count} / ${kpi.orders_count} Done`;
                 }
             } catch (err) {
-                console.error(err);
+                console.error("Admin analytics recovery error: ", err);
             }
         }
 

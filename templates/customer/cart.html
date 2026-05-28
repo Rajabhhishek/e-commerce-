@@ -174,8 +174,8 @@
 </div>
 </div>
 <div class="text-right flex flex-col items-end">
-<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$159.00</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant line-through">$189.00</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">₹159.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through">₹189.00</span>
 </div>
 </div>
 <!-- Item 2 -->
@@ -199,7 +199,7 @@
 </div>
 </div>
 <div class="text-right flex flex-col items-end">
-<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$299.00</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">₹299.00</span>
 </div>
 </div>
 <!-- Item 3 -->
@@ -224,8 +224,8 @@
 </div>
 <div class="text-right flex flex-col items-end">
 <div class="flex flex-col">
-<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$398.00</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">($199.00 each)</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">₹398.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">(₹199.00 each)</span>
 </div>
 </div>
 </div>
@@ -237,7 +237,7 @@
 <div class="space-y-4 mb-8">
 <div class="flex justify-between items-center">
 <span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
-<span class="font-body-lg text-body-lg text-on-surface">$856.00</span>
+<span class="font-body-lg text-body-lg text-on-surface">₹856.00</span>
 </div>
 <div class="flex justify-between items-center">
 <span class="font-body-md text-body-md text-on-surface-variant">Shipping</span>
@@ -245,11 +245,11 @@
 </div>
 <div class="flex justify-between items-center">
 <span class="font-body-md text-body-md text-on-surface-variant">Tax (Estimated)</span>
-<span class="font-body-lg text-body-lg text-on-surface">$68.48</span>
+<span class="font-body-lg text-body-lg text-on-surface">₹68.48</span>
 </div>
 <div class="pt-4 border-t border-outline-variant/30 flex justify-between items-center">
 <span class="font-title-md text-title-md text-on-surface font-bold">Total</span>
-<span class="font-headline-lg text-headline-lg text-primary">$924.48</span>
+<span class="font-headline-lg text-headline-lg text-primary">₹924.48</span>
 </div>
 </div>
 <!-- Coupon Input -->
@@ -280,25 +280,30 @@
 </div>
 </div>
 </main>
-<!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-container-lowest/90 dark:bg-surface-container-lowest/90 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_12px_0_rgba(0,0,0,0.5)] rounded-t-xl">
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-on-surface-variant/10 rounded-xl transition-all active:scale-95" href="/">
-<span class="material-symbols-outlined text-[24px]">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-on-surface-variant/10 rounded-xl transition-all active:scale-95" href="/">
-<span class="material-symbols-outlined text-[24px]">search</span>
-<span class="font-label-sm text-label-sm">Search</span>
-</a>
-<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl px-4 py-1.5 transition-all active:scale-95 cursor-pointer" href="/cart">
-<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
-<span class="font-label-sm text-label-sm">Cart</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-on-surface-variant/10 rounded-xl transition-all active:scale-95" href="/profile">
-<span class="material-symbols-outlined text-[24px]">person</span>
-<span class="font-label-sm text-label-sm">Profile</span>
-</a>
-</nav>
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-[480px] w-[calc(100%-32px)] z-50 flex justify-around items-center px-3 py-2 bg-surface-container/90 backdrop-blur-lg border border-outline-variant/30 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+        <a href="/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">home</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Home</span>
+        </a>
+        <a href="/pharmacy" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">medical_services</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span>
+        </a>
+        <a href="/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Search</span>
+        </a>
+        <!-- ACTIVE: Cart -->
+        <a href="/cart" class="flex flex-col items-center justify-center bg-primary-container text-background font-bold rounded-xl px-4.5 py-2.5 active:scale-95 transition-all shadow-md shadow-primary-container/20 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px] font-bold">shopping_cart</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Cart</span>
+        </a>
+        <a href="/profile" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">person</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Profile</span>
+        </a>
+    </nav>
 <script>
         // Micro-interaction: Subtle parallax on scroll for cards
         window.addEventListener('scroll', () => {

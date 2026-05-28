@@ -38,6 +38,17 @@ def profile():
     orders = Order.query.filter_by(customer_id=current_user.id).order_by(Order.created_at.desc()).all()
     return render_template('customer/profile.html', orders=orders)
 
+@customer_bp.route('/pharmacy')
+def pharmacy():
+    # Fetch category Pharmacy
+    category = Category.query.filter_by(name='Pharmacy').first()
+    products = []
+    if category:
+        products = Product.query.filter_by(category_id=category.id).all()
+    
+    categories = Category.query.all()
+    return render_template('customer/pharmacy.html', categories=categories, products=products)
+
 # --- API ENDPOINTS ---
 
 @customer_bp.route('/api/products', methods=['GET'])

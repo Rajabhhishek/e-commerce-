@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ShopSmart Home</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopSmart - Elevate Your Space</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+        .premium-glass {
+            background: rgba(13, 20, 38, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(129, 140, 248, 0.15);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
+            background: rgba(23, 31, 51, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(129, 140, 248, 0.12);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(129, 140, 248, 0.4);
+            box-shadow: 0 20px 40px rgba(129, 140, 248, 0.12);
         }
         .category-scroll::-webkit-scrollbar {
             display: none;
@@ -24,67 +39,46 @@
             scrollbar-width: none;
         }
         body {
-            min-height: max(884px, 100dvh);
+            background-color: #050a17;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(68, 226, 205, 0.06) 0px, transparent 50%);
+            min-height: 100vh;
         }
     </style>
-<script id="tailwind-config">
+    <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
           theme: {
             extend: {
               "colors": {
-                      "on-secondary": "#003731",
-                      "surface-tint": "#bdc2ff",
-                      "primary-fixed-dim": "#bdc2ff",
-                      "on-secondary-fixed": "#00201c",
-                      "surface-container-highest": "#2d3449",
+                      "background": "#050a17",
+                      "surface": "#0d1426",
+                      "surface-container": "#111a30",
+                      "surface-container-low": "#090f1d",
+                      "surface-container-high": "#1a2540",
+                      "surface-container-highest": "#223154",
                       "on-background": "#dae2fd",
-                      "inverse-surface": "#dae2fd",
-                      "on-primary-container": "#101b8a",
-                      "primary-fixed": "#e0e0ff",
-                      "tertiary": "#f7bd3e",
-                      "on-tertiary-container": "#3e2b00",
-                      "on-primary-fixed-variant": "#2f3aa3",
-                      "on-error": "#690005",
-                      "inverse-primary": "#4953bc",
-                      "error": "#ffb4ab",
-                      "tertiary-container": "#c08d00",
-                      "surface-dim": "#0b1326",
-                      "background": "#0b1326",
-                      "surface-container-high": "#222a3d",
-                      "on-tertiary-fixed-variant": "#5d4200",
-                      "on-tertiary-fixed": "#261900",
-                      "error-container": "#93000a",
-                      "surface-container-lowest": "#060e20",
-                      "surface-container-low": "#131b2e",
-                      "on-primary-fixed": "#000767",
-                      "surface-container": "#171f33",
-                      "on-tertiary": "#402d00",
-                      "tertiary-fixed-dim": "#f7bd3e",
-                      "secondary-container": "#03c6b2",
-                      "inverse-on-surface": "#283044",
-                      "on-primary": "#131e8c",
                       "on-surface": "#dae2fd",
-                      "on-surface-variant": "#c6c5d5",
-                      "secondary-fixed-dim": "#3cddc7",
-                      "tertiary-fixed": "#ffdea3",
-                      "surface": "#0b1326",
-                      "secondary-fixed": "#62fae3",
-                      "surface-bright": "#31394d",
-                      "outline": "#908f9e",
-                      "on-error-container": "#ffdad6",
-                      "on-secondary-container": "#004d44",
+                      "on-surface-variant": "#94a3b8",
                       "primary": "#bdc2ff",
-                      "outline-variant": "#454653",
-                      "on-secondary-fixed-variant": "#005047",
                       "primary-container": "#818cf8",
+                      "on-primary": "#131e8c",
+                      "on-primary-container": "#101b8a",
                       "secondary": "#44e2cd",
-                      "surface-variant": "#2d3449"
+                      "on-secondary": "#003731",
+                      "secondary-container": "#03c6b2",
+                      "tertiary": "#f7bd3e",
+                      "on-tertiary": "#402d00",
+                      "outline": "#475569",
+                      "outline-variant": "#334155"
               },
               "borderRadius": {
                       "DEFAULT": "0.25rem",
                       "lg": "0.5rem",
                       "xl": "0.75rem",
+                      "2xl": "1rem",
+                      "3xl": "1.5rem",
                       "full": "9999px"
               },
               "spacing": {
@@ -117,210 +111,274 @@
         }
       </script>
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
-<!-- TopAppBar -->
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30">
-<div class="flex items-center gap-4">
-<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
-<span class="material-symbols-outlined text-primary">menu</span>
-</button>
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">ShopSmart</h1>
-</div>
-<div class="flex items-center gap-3">
-<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
-<span class="material-symbols-outlined text-primary">notifications</span>
-</button>
-{% if current_user.is_authenticated %}
-<a href="/auth/logout" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-background bg-primary hover:bg-primary-container rounded-xl transition-all active:scale-95 flex items-center gap-1.5 shadow-md shadow-primary/10">
-<span class="material-symbols-outlined text-sm font-bold">logout</span>
-<span>Logout</span>
-</a>
-{% else %}
-<a href="/auth/login" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary border border-primary/30 hover:border-primary/60 hover:bg-primary/10 rounded-xl transition-all active:scale-95 flex items-center gap-1.5">
-<span class="material-symbols-outlined text-sm font-bold">login</span>
-<span>Login</span>
-</a>
-{% endif %}
-</div>
-</header>
-<main class="pb-24 max-w-[1440px] mx-auto">
-<!-- Hero Banner with Search Overlay -->
-<section class="relative h-[420px] mb-8 overflow-hidden">
-<img alt="Hero" class="absolute inset-0 w-full h-full object-cover" data-alt="A curated arrangement of high-end vintage electronics and futuristic metallic accessories on a deep slate-blue surface. The scene is lit with moody indigo and cyan neon lights, creating a high-tech dark mode workspace aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCxuGL0lsAoOGIUNZi8q3qxiMXtlqQoXIvY3uXlKBwFwLmhI0Awyv84HATFOOeaOIWoHuVMPZXDs5JUhxgvYWXahNSrb-4eDMex7dQ-JmkgzNsB8FeTcNf1MngTY0kREVj-ASI4O5NTk2Sd4xkjNyzjDEwWnB0mL1JQjWwAc0K1mHcdmRpUlsb6mTq9VrWVVAZCTe0hIcg4vmuEE1tlAXN8g3HTLo6J_Km9uP8Xeefcr01bD_icmSLqlhjoDsPncojwHjKL-y5_g4i"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
-<div class="absolute bottom-0 left-0 w-full p-6 flex flex-col gap-6">
-<div class="max-w-xl">
-<h2 class="font-display-lg text-4xl font-bold text-on-surface mb-2 leading-tight">Elevate Your Tech Game</h2>
-<p class="font-body-lg text-on-surface-variant">Discover the future of premium audio and essential gear.</p>
-</div>
-<!-- Integrated Search Bar -->
-<div class="relative w-full max-w-2xl">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="w-full h-14 pl-12 pr-4 rounded-xl bg-surface-container-low/90 backdrop-blur-md border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none text-on-surface" placeholder="Search for products, brands..." type="text"/>
-</div>
-</div>
-</section>
-<!-- Grid-based Categories -->
-<section class="px-4 mb-10">
-<div class="flex justify-between items-center mb-6">
-<h3 class="font-title-md text-title-md text-on-surface">Browse Categories</h3>
-<button class="font-label-sm text-label-sm text-primary uppercase tracking-wider">See All</button>
-</div>
-<div class="grid grid-cols-4 sm:grid-cols-6 gap-4">
-<div class="flex flex-col items-center gap-2">
-<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">laptop_mac</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Tech</span>
-</div>
-<div class="flex flex-col items-center gap-2">
-<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">checkroom</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Fashion</span>
-</div>
-<div class="flex flex-col items-center gap-2">
-<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">chair</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Home</span>
-</div>
-<div class="flex flex-col items-center gap-2">
-<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">fitness_center</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Sports</span>
-</div>
-<div class="hidden sm:flex flex-col items-center gap-2">
-<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">face</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Beauty</span>
-</div>
-<div class="hidden sm:flex flex-col items-center gap-2">
-<div class="aspect-square w-full rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer group">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-3xl">headset</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Audio</span>
-</div>
-</div>
-</section>
-<!-- Dynamic Recommended Grid (Mixed Sizes) -->
-<section class="px-4 mb-12">
-<div class="flex justify-between items-center mb-6">
-<h3 class="font-title-md text-title-md text-on-surface">Personalized Picks</h3>
-<span class="material-symbols-outlined text-outline">tune</span>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-min">
-<!-- Large Focus Card -->
-<div class="col-span-2 row-span-2 group cursor-pointer">
-<div class="aspect-[4/5] rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
-<img alt="Shoes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A pair of sleek, modern athletic sneakers featuring futuristic design elements and reflective materials. The shoes are set against a dark, atmospheric backdrop with sharp, colorful light trails in indigo and teal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-RM_AA_-yCKMjrkjPWujto6m0nTXtu5ROoAJ5GnibIw_m3KweU1daoZILogmKop5awrlCM_-ORVkQWz4RdbWBf1ziQPmLagaFzDFMoyNW6TtDnQj2Y0V8xGP0L96BHGJN9vY1EgeRkTono6Q_opgyx01TWb_d1-dmqNXd14xP83S8GcFp3gAcb34XaO-bgz9aUcOeFOKGcRslOlCWCTUnsvIjBeIWliuxvZITcGVO888MhB5X2NVWTQQAeGKry3S0-cVo5hxoCNAN"/>
-<div class="absolute top-4 left-4">
-<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-1 rounded uppercase">New Arrival</span>
-</div>
-<button class="absolute top-4 right-4 w-10 h-10 rounded-full glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined text-on-surface">favorite</span>
-</button>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
-<p class="font-label-sm text-primary mb-1">NIKE GEAR</p>
-<h4 class="font-title-md text-white font-bold text-xl">Kinetic Runners X1</h4>
-<div class="flex items-center gap-2 mt-1">
-<span class="text-white font-bold">$129.00</span>
-<span class="text-white/60 text-sm line-through">$150.00</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Standard Cards -->
-<div class="group cursor-pointer">
-<div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
-<img alt="Headphones" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Professional over-ear studio headphones with a matte black finish and subtle indigo metallic details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQG0rmKccsHKgPGjsNKBz-FT9CC6XvPxfAkMDHs3KEMomwpEnXheWaz0kolZl9G5yifjKFPWHfBB4qa7LeOH9aP8F-0hkEgV5OjAZLS5mRjvqT887PCSBfYOgdNq9Npqz8tEpl5x9hN7-1ZHVOjGdsLOIDzqdZh3bfcaapO5KfJZ-Jqg1kXW7tyAMCMydmtbLOZ8o45lbAZ28F7C9AP0QeBfqLzMHuiz3GovQOe-XGEhQbQ1xw3j5vT5MQ4LPiqVlv5KiBsJ3CLcDX"/>
-<button class="absolute top-2 right-2 w-8 h-8 rounded-full glass-card flex items-center justify-center">
-<span class="material-symbols-outlined text-sm">favorite</span>
-</button>
-</div>
-<p class="font-label-sm text-on-surface-variant mb-1">SONY AUDIO</p>
-<h5 class="font-body-md text-on-surface font-semibold mb-1 truncate">WH-1000XM5 Dark</h5>
-<span class="font-body-md text-primary font-bold">$349.00</span>
-</div>
-<div class="group cursor-pointer">
-<div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
-<img alt="Watch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A luxurious smartwatch with a dark titanium frame and a minimalist black OLED interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrxrg2BEsx7EWAYVcihXJqENm_sKDsbFMXK5-uDP9rV1YIn3QWFQnl-jpfjyDh7rItwIXzRtJgBg3PPiPWDN19LxbEBUyVOjl8dZTTvehJsIekYAlMDnu7hyLOqcFBLYXNm6HoCa8NUY0GdEOQrPkAANIjKaIlRV0BSdky5qbQ0tSD_rWqq7Jhsj75-gkbYK3P76r_uEWTjGDEADqC5hyI3h8UtEf_CyaCXqhjFICd3V236eoo9u_HU3rM3WEbQGuyTn1NcICX01et"/>
-<button class="absolute top-2 right-2 w-8 h-8 rounded-full glass-card flex items-center justify-center">
-<span class="material-symbols-outlined text-sm">favorite</span>
-</button>
-</div>
-<p class="font-label-sm text-on-surface-variant mb-1">TECH-TIME</p>
-<h5 class="font-body-md text-on-surface font-semibold mb-1 truncate">Vanguard Pro Smart</h5>
-<span class="font-body-md text-primary font-bold">$499.00</span>
-</div>
-<!-- Square Highlights in Grid -->
-<div class="group cursor-pointer">
-<div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low mb-3 relative">
-<img alt="Sunglasses" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Designer matte black sunglasses with dark polarized lenses, showcased in a minimalist setting with sharp architectural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvHjCZwlv-wh-yG4b48iAkJcto4zT6yaYd9NBwFfeFykKcG9uDRRN7JjTF3CLYttey4dsyHSVOeoN1Zw-6nhCKN9xNqdCwM-rZEMEwk5DCDoUbObBa8VYOXGHztSZKCvTMWwd5t_ZIOxfAzdolwff_GTw4BU8bkRdpDB_mmKAsxHbXPGfWaQ-dvnzBq3N0g9EILCVWtg9lEmFvpvqwtZZDKQVWTuWht3xGXsilpgQ7IkAvcbxpbRgvqS0mhAxbdMNwFWdMVMTr7vAT"/>
-<button class="absolute top-2 right-2 w-8 h-8 rounded-full glass-card flex items-center justify-center">
-<span class="material-symbols-outlined text-sm">favorite</span>
-</button>
-</div>
-<p class="font-label-sm text-on-surface-variant mb-1">OPTIC LUX</p>
-<h5 class="font-body-md text-on-surface font-semibold mb-1 truncate">Eclipse Shade 400</h5>
-<span class="font-body-md text-primary font-bold">$185.00</span>
-</div>
-<div class="group relative overflow-hidden rounded-2xl bg-secondary-container/20 border border-secondary/30 p-4 flex flex-col justify-between">
-<div class="z-10">
-<span class="material-symbols-outlined text-secondary mb-1">local_offer</span>
-<h4 class="font-title-md text-on-surface text-sm">Members Only</h4>
-<p class="text-xs text-on-surface-variant">Extra 10% off checkout</p>
-</div>
-<div class="z-10 mt-2">
-<button class="text-[10px] font-bold uppercase tracking-widest text-secondary">Join Club</button>
-</div>
-<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl"></div>
-</div>
-</div>
-</section>
-</main>
-<!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-container-lowest/90 backdrop-blur-lg border-t border-outline-variant/30 rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.5)]">
-<!-- Active Home -->
-<a href="/" class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl px-4 py-1.5 active:scale-95 transition-transform duration-150 cursor-pointer">
-<span class="material-symbols-outlined text-[24px]">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<a href="/" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high cursor-pointer">
-<span class="material-symbols-outlined text-[24px]">search</span>
-<span class="font-label-sm text-label-sm">Search</span>
-</a>
-<a href="/cart" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high cursor-pointer relative">
-<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
-<span class="font-label-sm text-label-sm">Cart</span>
-<span class="absolute top-1 right-3 w-4 h-4 bg-tertiary text-on-tertiary text-[10px] flex items-center justify-center rounded-full font-bold">2</span>
-</a>
-<a href="/profile" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high cursor-pointer">
-<span class="material-symbols-outlined text-[24px]">person</span>
-<span class="font-label-sm text-label-sm">Profile</span>
-</a>
-</nav>
-<script>
-    // Micro-interaction for category items
-    document.querySelectorAll('.aspect-square.rounded-2xl').forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.add('ring-2', 'ring-primary');
-            setTimeout(() => {
-                item.classList.remove('ring-2', 'ring-primary');
-            }, 400);
-        });
-    });
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden selection:bg-primary-container/30 selection:text-primary pb-28 relative">
 
-    // Simple scroll parallax for glass cards
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const glassCards = document.querySelectorAll('.glass-card');
-        glassCards.forEach(card => {
-            const speed = 0.02;
-            card.style.transform = `translateY(${scrolled * speed}px)`;
+    <!-- Ambient glows -->
+    <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-primary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute top-1/2 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- Header bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 shadow-md">
+        <div class="flex items-center gap-4">
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-2xl">menu</span>
+            </button>
+            <h1 class="font-headline-lg-mobile text-xl font-bold tracking-tight text-primary flex items-center gap-1.5 cursor-pointer">
+                ShopSmart
+            </h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
+                <span class="material-symbols-outlined text-primary">notifications</span>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-secondary rounded-full"></span>
+            </button>
+            {% if current_user.is_authenticated %}
+            <a href="/auth/logout" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-background bg-gradient-to-r from-primary-container to-secondary hover:brightness-105 rounded-xl transition-all active:scale-95 flex items-center gap-1.5 shadow-md shadow-primary-container/10 cursor-pointer">
+                <span class="material-symbols-outlined text-sm font-bold">logout</span>
+                <span>Logout</span>
+            </a>
+            {% else %}
+            <a href="/auth/login" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary border border-primary/20 hover:border-primary/50 hover:bg-primary/5 rounded-xl transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer">
+                <span class="material-symbols-outlined text-sm font-bold">login</span>
+                <span>Login</span>
+            </a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="pt-20 max-w-[1200px] mx-auto px-6 flex flex-col gap-10">
+        
+        <!-- Hero Banner with Search Overlay -->
+        <section class="relative h-[380px] rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/20 mt-4 group">
+            <img alt="Hero" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[12s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCxuGL0lsAoOGIUNZi8q3qxiMXtlqQoXIvY3uXlKBwFwLmhI0Awyv84HATFOOeaOIWoHuVMPZXDs5JUhxgvYWXahNSrb-4eDMex7dQ-JmkgzNsB8FeTcNf1MngTY0kREVj-ASI4O5NTk2Sd4xkjNyzjDEwWnB0mL1JQjWwAc0K1mHcdmRpUlsb6mTq9VrWVVAZCTe0hIcg4vmuEE1tlAXN8g3HTLo6J_Km9uP8Xeefcr01bD_icmSLqlhjoDsPncojwHjKL-y5_g4i"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-black/10"></div>
+            
+            <div class="absolute bottom-0 left-0 w-full p-8 flex flex-col gap-6">
+                <div class="max-w-xl">
+                    <span class="text-[10px] font-mono font-bold text-secondary uppercase tracking-widest bg-secondary/15 border border-secondary/30 px-3 py-1 rounded-full">Summer Spec showcase</span>
+                    <h2 class="font-display-lg text-4xl lg:text-5xl font-bold text-white mt-3 leading-none tracking-tight">Elevate Your Tech Game</h2>
+                    <p class="font-body-lg text-on-surface-variant text-base mt-2">Discover the future of premium audio, trainer shoes, and smart wearables.</p>
+                </div>
+                
+                <!-- Integrated Search Bar -->
+                <div class="relative w-full max-w-2xl group/search">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                    <input id="product-search-input" class="w-full h-14 pl-12 pr-4 rounded-2xl bg-surface-container-low/80 backdrop-blur-md border border-outline-variant/45 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none text-on-surface text-sm placeholder:text-on-surface-variant/40" placeholder="Search premium catalog..." type="text"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Category Chips scroll list -->
+        <section class="flex flex-col gap-4">
+            <div class="flex justify-between items-center">
+                <h3 class="font-title-md text-xl font-bold text-on-surface">Browse Catalog</h3>
+                <span class="text-xs font-mono text-primary hover:underline cursor-pointer uppercase tracking-wider">Scroll filters</span>
+            </div>
+            
+            <!-- Category Chips dynamic scrolling wrapper -->
+            <div class="category-scroll flex items-center gap-3 overflow-x-auto pb-2" id="category-chips-container">
+                <button onclick="filterByCategory(null)" class="category-chip px-5 py-2.5 rounded-full bg-primary text-background border border-primary/20 text-xs font-bold transition-all hover:brightness-115 shrink-0 flex items-center gap-2" id="cat-all">
+                    <span class="material-symbols-outlined text-sm font-bold">grid_view</span>
+                    <span>All Items</span>
+                </button>
+                {% for cat in categories %}
+                <button onclick="filterByCategory({{ cat.id }}, this)" class="category-chip px-5 py-2.5 rounded-full bg-surface-container border border-outline-variant/40 hover:border-primary/40 text-on-surface-variant hover:text-on-surface text-xs font-semibold transition-all shrink-0 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">
+                        {% if cat.name == 'Tech' %}laptop_mac
+                        {% elif cat.name == 'Fashion' %}checkroom
+                        {% elif cat.name == 'Home' %}chair
+                        {% elif cat.name == 'Sports' %}fitness_center
+                        {% elif cat.name == 'Beauty' %}face
+                        {% elif cat.name == 'Audio' %}headset
+                        {% else %}category
+                        {% endif %}
+                    </span>
+                    <span>{{ cat.name }}</span>
+                </button>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Showcase Items Grid -->
+        <section class="flex flex-col gap-6 mb-12">
+            <div class="flex justify-between items-center border-b border-outline-variant/20 pb-4">
+                <h3 class="font-title-md text-xl font-bold text-on-surface flex items-center gap-2">
+                    Personalized Picks
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant/30 text-on-surface-variant" id="picks-count">4 Products</span>
+                </h3>
+                <button class="p-2 rounded-xl hover:bg-surface-container-high/60 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+                    <span class="material-symbols-outlined">tune</span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6" id="product-showcase-grid">
+                <!-- Fallback seeded cards or updated catalog listings rendered here dynamically -->
+                {% for p in products %}
+                <div class="glass-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="window.location.href='/product/{{ p.id }}'">
+                    <div>
+                        <!-- Image Showcase -->
+                        <div class="aspect-square w-full rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/15 relative">
+                            <img alt="{{ p.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ p.image_url }}"/>
+                            <button onclick="event.stopPropagation(); toggleFav(this)" class="absolute top-2.5 right-2.5 w-8.5 h-8.5 rounded-full bg-background/80 hover:bg-background backdrop-blur-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shadow-md border border-outline-variant/20">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                            <span class="absolute bottom-2.5 left-2.5 bg-background/85 backdrop-blur-md text-on-surface border border-outline-variant/35 text-[9px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-md uppercase">
+                                {{ p.category.name if p.category else 'Listing' }}
+                            </span>
+                        </div>
+
+                        <!-- Info details -->
+                        <div class="mt-4 flex flex-col gap-1">
+                            <h4 class="font-title-md text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">{{ p.name }}</h4>
+                            <p class="text-xs text-on-surface-variant line-clamp-2 leading-relaxed h-8 mt-0.5">{{ p.description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-outline-variant/15 flex items-center justify-between">
+                        <span class="text-secondary font-bold font-mono text-sm">₹{{ "%.2f"|format(p.price) }}</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-mono font-bold {{ 'text-secondary bg-secondary/15' if p.stock > 0 else 'text-error bg-error/15' }} px-2 py-0.5 rounded border {{ 'border-secondary/20' if p.stock > 0 else 'border-error/20' }}">
+                                {{ p.stock }} left
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-[480px] w-[calc(100%-32px)] z-50 flex justify-around items-center px-3 py-2 bg-surface-container/90 backdrop-blur-lg border border-outline-variant/30 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+        <!-- Active Home -->
+        <a href="/" class="flex flex-col items-center justify-center bg-primary-container text-background font-bold rounded-xl px-4.5 py-2.5 active:scale-95 transition-all shadow-md shadow-primary-container/20 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px] font-bold">home</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Home</span>
+        </a>
+        <a href="/pharmacy" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">medical_services</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span>
+        </a>
+        <a onclick="document.getElementById('product-search-input').focus(); window.scrollTo({top: 150, behavior: 'smooth'});" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Search</span>
+        </a>
+        <a href="/cart" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 relative cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Cart</span>
+            <span class="absolute top-1.5 right-2 w-4 h-4 bg-tertiary text-on-tertiary text-[9px] flex items-center justify-center rounded-full font-bold shadow border border-background">2</span>
+        </a>
+        <a href="/profile" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">person</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Profile</span>
+        </a>
+    </nav>
+
+    <script>
+        // Toggle Fav interaction
+        function toggleFav(btn) {
+            const span = btn.querySelector('.material-symbols-outlined');
+            if (span.style.fontVariationSettings && span.style.fontVariationSettings.includes("'FILL' 1")) {
+                span.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+                btn.classList.remove('text-error');
+                btn.classList.add('text-on-surface-variant');
+            } else {
+                span.style.fontVariationSettings = "'FILL' 1, 'wght' 400";
+                btn.classList.add('text-error');
+                btn.classList.remove('text-on-surface-variant');
+            }
+        }
+
+        // Live Search & Category Filtering
+        let activeCategoryId = null;
+
+        async function filterByCategory(catId, btnEl) {
+            activeCategoryId = catId;
+            
+            // Adjust active styles for chips
+            document.querySelectorAll('.category-chip').forEach(btn => {
+                btn.className = "category-chip px-5 py-2.5 rounded-full bg-surface-container border border-outline-variant/40 hover:border-primary/40 text-on-surface-variant hover:text-on-surface text-xs font-semibold transition-all shrink-0 flex items-center gap-2";
+            });
+
+            if (btnEl) {
+                btnEl.className = "category-chip px-5 py-2.5 rounded-full bg-primary text-background border border-primary/20 text-xs font-bold transition-all hover:brightness-115 shrink-0 flex items-center gap-2";
+            } else {
+                document.getElementById('cat-all').className = "category-chip px-5 py-2.5 rounded-full bg-primary text-background border border-primary/20 text-xs font-bold transition-all hover:brightness-115 shrink-0 flex items-center gap-2";
+            }
+
+            fetchAndRender();
+        }
+
+        // Search trigger loader
+        document.getElementById('product-search-input').addEventListener('input', () => {
+            fetchAndRender();
         });
-    });
-</script>
-</body></html>
+
+        async function fetchAndRender() {
+            const searchVal = document.getElementById('product-search-input').value.trim();
+            let url = `/api/products?search=${encodeURIComponent(searchVal)}`;
+            if (activeCategoryId) {
+                url += `&category_id=${activeCategoryId}`;
+            }
+
+            try {
+                const res = await fetch(url);
+                const products = await res.json();
+                
+                const grid = document.getElementById('product-showcase-grid');
+                grid.innerHTML = ''; // Clear
+
+                document.getElementById('picks-count').textContent = `${products.length} Products`;
+
+                if (products.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full py-16 text-center text-on-surface-variant font-mono text-sm">
+                        <span class="material-symbols-outlined text-4xl block text-outline-variant mb-2">sentiment_dissatisfied</span>
+                        No matching premium items found.
+                    </div>`;
+                    return;
+                }
+
+                products.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = "glass-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group cursor-pointer";
+                    card.onclick = () => window.location.href = `/product/${p.id}`;
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="aspect-square w-full rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/15 relative">
+                                <img alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${p.image_url}"/>
+                                <button onclick="event.stopPropagation(); toggleFav(this)" class="absolute top-2.5 right-2.5 w-8.5 h-8.5 rounded-full bg-background/80 hover:bg-background backdrop-blur-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shadow-md border border-outline-variant/20">
+                                    <span class="material-symbols-outlined text-sm">favorite</span>
+                                </button>
+                                <span class="absolute bottom-2.5 left-2.5 bg-background/85 backdrop-blur-md text-on-surface border border-outline-variant/35 text-[9px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-md uppercase">
+                                    Product
+                                </span>
+                            </div>
+
+                            <div class="mt-4 flex flex-col gap-1">
+                                <h4 class="font-title-md text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">${p.name}</h4>
+                                <p class="text-xs text-on-surface-variant line-clamp-2 leading-relaxed h-8 mt-0.5">${p.description}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-outline-variant/15 flex items-center justify-between">
+                            <span class="text-secondary font-bold font-mono text-sm">₹${p.price.toFixed(2)}</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[10px] font-mono font-bold ${p.stock > 0 ? 'text-secondary bg-secondary/15' : 'text-error bg-error/15'} px-2 py-0.5 rounded border ${p.stock > 0 ? 'border-secondary/20' : 'border-error/20'}">
+                                    ${p.stock} left
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error("Showcase registry syncing error: ", err);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -18,7 +18,8 @@ def seed_database():
             {'name': 'Home', 'description': 'Ergonomic furniture and ambient lightning fixtures.'},
             {'name': 'Sports', 'description': 'High-performance athletic gear and trainers.'},
             {'name': 'Beauty', 'description': 'Aesthetic skincare, cosmetics, and self-care.'},
-            {'name': 'Audio', 'description': 'Premium studio over-ear headphones and listening gears.'}
+            {'name': 'Audio', 'description': 'Premium studio over-ear headphones and listening gears.'},
+            {'name': 'Pharmacy', 'description': 'Essential health supplies, medicine, and first-aid.'}
         ]
         
         categories = {}
@@ -95,6 +96,30 @@ def seed_database():
                 'stock': 12,
                 'category': 'Fashion',
                 'image_url': 'https://lh3.googleusercontent.com/aida-public/AB6AXuAvHjCZwlv-wh-yG4b48iAkJcto4zT6yaYd9NBwFfeFykKcG9uDRRN7JjTF3CLYttey4dsyHSVOeoN1Zw-6nhCKN9xNqdCwM-rZEMEwk5DCDoUbObBa8VYOXGHztSZKCvTMWwd5t_ZIOxfAzdolwff_GTw4BU8bkRdpDB_mmKAsxHbXPGfWaQ-dvnzBq3N0g9EILCVWtg9lEmFvpvqwtZZDKQVWTuWht3xGXsilpgQ7IkAvcbxpbRgvqS0mhAxbdMNwFWdMVMTr7vAT'
+            },
+            {
+                'name': 'Bio-Shield First Aid Kit',
+                'description': 'A premium clinical emergency kit packed with essential medical supplies, sterile bandages, and antiseptics in a robust utility case.',
+                'price': 45.00,
+                'stock': 30,
+                'category': 'Pharmacy',
+                'image_url': 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQG0rmKccsHKgPGjsNKBz-FT9CC6XvPxfAkMDHs3KEMomwpEnXheWaz0kolZl9G5yifjKFPWHfBB4qa7LeOH9aP8F-0hkEgV5OjAZLS5mRjvqT887PCSBfYOgdNq9Npqz8tEpl5x9hN7-1ZHVOjGdsLOIDzqdZh3bfcaapO5KfJZ-Jqg1kXW7tyAMCMydmtbLOZ8o45lbAZ28F7C9AP0QeBfqLzMHuiz3GovQOe-XGEhQbQ1xw3j5vT5MQ4LPiqVlv5KiBsJ3CLcDX'
+            },
+            {
+                'name': 'Pulse-Check Oximeter',
+                'description': 'High-precision dark titanium digital fingertip oxygen monitor with an active dark OLED screen displaying realtime telemetry.',
+                'price': 55.00,
+                'stock': 25,
+                'category': 'Pharmacy',
+                'image_url': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBrxrg2BEsx7EWAYVcihXJqENm_sKDsbFMXK5-uDP9rV1YIn3QWFQnl-jpfjyDh7rItwIXzRtJgBg3PPiPWDN19LxbEBUyVOjl8dZTTvehJsIekYAlMDnu7hyLOqcFBLYXNm6HoCa8NUY0GdEOQrPkAANIjKaIlRV0BSdky5qbQ0tSD_rWqq7Jhsj75-gkbYK3P76r_uEWTjGDEADqC5hyI3h8UtEf_CyaCXqhjFICd3V236eoo9u_HU3rM3WEbQGuyTn1NcICX01et'
+            },
+            {
+                'name': 'Aura Multi-Vitamins',
+                'description': 'A bottle of daily organic health supplements and active minerals for optimal physical vitality and immune system fortification.',
+                'price': 29.00,
+                'stock': 50,
+                'category': 'Pharmacy',
+                'image_url': 'https://lh3.googleusercontent.com/aida-public/AB6AXuA-RM_AA_-yCKMjrkjPWujto6m0nTXtu5ROoAJ5GnibIw_m3KweU1daoZILogmKop5awrlCM_-ORVkQWz4RdbWBf1ziQPmLagaFzDFMoyNW6TtDnQj2Y0V8xGP0L96BHGJN9vY1EgeRkTono6Q_opgyx01TWb_d1-dmqNXd14xP83S8GcFp3gAcb34XaO-bgz9aUcOeFOKGcRslOlCWCTUnsvIjBeIWliuxvZITcGVO888MhB5X2NVWTQQAeGKry3S0-cVo5hxoCNAN'
             }
         ]
         

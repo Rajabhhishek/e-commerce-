@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopSmart - Pharmacy Node</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .premium-glass {
+            background: rgba(13, 20, 38, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(129, 140, 248, 0.18);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(129, 140, 248, 0.12);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(68, 226, 205, 0.4);
+            box-shadow: 0 15px 30px rgba(68, 226, 205, 0.1);
+        }
+        body {
+            background-color: #050a17;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(68, 226, 205, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(129, 140, 248, 0.1) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#050a17",
+                      "surface": "#0d1426",
+                      "surface-container": "#111a30",
+                      "surface-container-low": "#090f1d",
+                      "surface-container-high": "#1a2540",
+                      "on-background": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "on-surface-variant": "#94a3b8",
+                      "primary": "#bdc2ff",
+                      "primary-container": "#818cf8",
+                      "on-primary": "#131e8c",
+                      "secondary": "#44e2cd",
+                      "on-secondary": "#003731",
+                      "tertiary": "#f7bd3e",
+                      "outline": "#475569",
+                      "outline-variant": "#334155",
+                      "error": "#f87171"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "2xl": "1rem",
+                      "3xl": "1.5rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "body-lg": ["Inter"],
+                      "title-md": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden selection:bg-primary-container/30 selection:text-primary pb-28">
+
+    <!-- TopAppBar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 shadow-md">
+        <div class="flex items-center gap-4">
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">menu</span>
+            </button>
+            <h1 class="font-headline-lg-mobile text-xl font-bold tracking-tight text-primary cursor-pointer">ShopSmart</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">notifications</span>
+            </button>
+            {% if current_user.is_authenticated %}
+            <a href="/auth/logout" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-background bg-gradient-to-r from-primary-container to-secondary hover:brightness-105 rounded-xl transition-all active:scale-95 flex items-center gap-1.5 shadow-md shadow-primary-container/10 cursor-pointer">
+                <span class="material-symbols-outlined text-sm font-bold">logout</span>
+                <span>Logout</span>
+            </a>
+            {% else %}
+            <a href="/auth/login" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary border border-primary/20 hover:border-primary/50 hover:bg-primary/5 rounded-xl transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer">
+                <span class="material-symbols-outlined text-sm font-bold">login</span>
+                <span>Login</span>
+            </a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="pt-20 max-w-[1000px] w-full mx-auto px-6 flex flex-col gap-10">
+        
+        <!-- Welcome banner -->
+        <div class="mt-4">
+            <span class="text-[10px] font-mono font-bold text-secondary bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">24/7 Clinical Support</span>
+            <h2 class="font-headline-lg text-3xl font-bold tracking-tight text-on-surface mt-3">ShopSmart Pharmacy & Health</h2>
+            <p class="text-on-surface-variant text-sm mt-1">Acquire verified medical supplies, upload prescriptions, and coordinate express deliveries.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Side: Prescription Uploader & Teleconsult -->
+            <div class="md:col-span-5 flex flex-col gap-6 w-full">
+                
+                <!-- Tactical Prescription Uploader -->
+                <div class="premium-glass p-6 rounded-3xl flex flex-col gap-5 border border-secondary/30">
+                    <div class="flex items-center gap-2.5">
+                        <span class="material-symbols-outlined text-secondary">clinical_notes</span>
+                        <h3 class="font-headline-lg text-base font-bold text-on-surface">Digital Rx Portal</h3>
+                    </div>
+                    
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Upload a clear photo of your medical prescription. Our clinical auditors will verify it and add designated medicines to your active cart node.</p>
+                    
+                    <!-- Drop area -->
+                    <div id="drop-area" class="border-2 border-dashed border-outline-variant/60 rounded-2xl p-6 text-center hover:border-secondary transition-colors cursor-pointer flex flex-col items-center justify-center min-h-[140px] bg-surface-container-low/40 relative group" onclick="document.getElementById('rx-file-input').click()">
+                        <input type="file" id="rx-file-input" class="hidden" accept="image/*,.pdf" onchange="handleFile(this.files[0])"/>
+                        
+                        <div id="upload-prompt" class="flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl text-secondary animate-pulse block mb-2 group-hover:scale-110 transition-transform">cloud_upload</span>
+                            <span class="text-xs font-bold text-on-surface">Drag & Drop Prescription</span>
+                            <span class="text-[10px] text-on-surface-variant mt-1">JPEG, PNG, PDF up to 5MB</span>
+                        </div>
+
+                        <div id="upload-progress" class="hidden w-full flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl animate-spin text-secondary block mb-2">progress_activity</span>
+                            <span class="text-xs font-bold text-on-surface">Auditing prescription details...</span>
+                            <div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-3 max-w-[180px] border border-outline-variant/30">
+                                <div class="bg-secondary h-full rounded-full transition-all duration-1000" id="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div id="upload-success" class="hidden w-full flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl text-secondary block mb-2">check_circle</span>
+                            <span class="text-xs font-bold text-secondary">Prescription Uploaded ✓</span>
+                            <span class="text-[10px] text-on-surface-variant mt-1" id="file-name-display">File verified.</span>
+                        </div>
+                    </div>
+
+                    <!-- Verification Checklist -->
+                    <div class="bg-surface-container-low/80 p-3.5 rounded-xl border border-outline-variant/30 flex flex-col gap-2 font-mono text-[10px]" id="audit-checklist-card">
+                        <div class="flex items-center justify-between text-on-surface-variant" id="check-sig">
+                            <span>1. CLINICAL DOCTOR SIGNATURE</span>
+                            <span class="font-bold tracking-wider" id="check-sig-val">PENDING</span>
+                        </div>
+                        <div class="flex items-center justify-between text-on-surface-variant" id="check-date">
+                            <span>2. PRESCRIPTION DATE STAMP</span>
+                            <span class="font-bold tracking-wider" id="check-date-val">PENDING</span>
+                        </div>
+                        <div class="flex items-center justify-between text-on-surface-variant" id="check-auth">
+                            <span>3. INTEGRITY AUTHENTICATION</span>
+                            <span class="font-bold tracking-wider" id="check-auth-val">PENDING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teleconsult Doctor card -->
+                <div class="premium-glass p-5 rounded-2xl flex items-center justify-between relative overflow-hidden group border-primary/20">
+                    <div class="z-10 max-w-[70%]">
+                        <span class="material-symbols-outlined text-primary text-xl">medical_services</span>
+                        <h4 class="text-sm font-bold text-on-surface mt-2">Consult Online Doctor</h4>
+                        <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">No prescription? Get digital verification within 10 minutes via our video medical hotline.</p>
+                        <button onclick="triggerToast('Teleconsult Active', 'Routing call to duty officer...')" class="mt-3 text-[10px] font-bold uppercase tracking-wider text-primary hover:text-secondary transition-colors">Start Video Call →</button>
+                    </div>
+                    <div class="w-14 h-14 rounded-xl bg-primary-container/10 flex items-center justify-center border border-primary-container/20 text-primary group-hover:scale-110 transition-transform shadow shadow-primary/10">
+                        <span class="material-symbols-outlined text-3xl">videocam</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Medical & Pharmacy Products -->
+            <div class="md:col-span-7 flex flex-col gap-5 w-full">
+                <div class="flex justify-between items-center border-b border-outline-variant/30 pb-3">
+                    <h3 class="font-headline-lg text-lg font-bold text-on-surface flex items-center gap-2">
+                        Essential Health Supplies
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded bg-surface-container-high border border-outline-variant/20 text-on-surface-variant font-semibold uppercase tracking-wider">{{ products|length }} Items</span>
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" id="pharmacy-grid">
+                    {% for p in products %}
+                    <div class="glass-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="window.location.href='/product/{{ p.id }}'">
+                        <div>
+                            <!-- Showcase -->
+                            <div class="aspect-square w-full rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/20 relative">
+                                <img alt="{{ p.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ p.image_url }}"/>
+                                <span class="absolute bottom-2.5 left-2.5 bg-background/85 backdrop-blur-md text-secondary border border-secondary/30 text-[9px] font-mono font-bold tracking-wider px-2 py-0.5 rounded uppercase">
+                                    {{ p.category.name if p.category else 'Medicine' }}
+                                </span>
+                            </div>
+
+                            <!-- Info -->
+                            <div class="mt-4 flex flex-col gap-1">
+                                <h4 class="font-title-md text-sm font-bold text-on-surface truncate group-hover:text-secondary transition-colors">{{ p.name }}</h4>
+                                <p class="text-xs text-on-surface-variant line-clamp-2 leading-relaxed h-8 mt-0.5">{{ p.description }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Price and checkout trigger -->
+                        <div class="mt-4 pt-3 border-t border-outline-variant/15 flex items-center justify-between">
+                            <span class="text-secondary font-bold font-mono text-sm">₹{{ "%.2f"|format(p.price) }}</span>
+                            <span class="text-[10px] font-mono font-bold text-secondary bg-secondary/10 border border-secondary/20 px-2 py-0.5 rounded uppercase">
+                                {{ p.stock }} left
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Success Toast Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 premium-glass border-secondary/40 px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/40 text-secondary">
+            <span class="material-symbols-outlined text-lg font-bold">check</span>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-on-surface" id="toast-title">Pharmacy Node</h4>
+            <p class="text-xs text-on-surface-variant" id="toast-desc">Operation verified.</p>
+        </div>
+    </div>
+
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-[480px] w-[calc(100%-32px)] z-50 flex justify-around items-center px-3 py-2 bg-surface-container/90 backdrop-blur-lg border border-outline-variant/30 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+        <a href="/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">home</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Home</span>
+        </a>
+        
+        <!-- ACTIVE: Pharmacy -->
+        <a href="/pharmacy" class="flex flex-col items-center justify-center bg-primary-container text-background font-bold rounded-xl px-4 py-2.5 active:scale-95 transition-all shadow-md shadow-primary-container/20 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px] font-bold">medical_services</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span>
+        </a>
+
+        <a href="/" onclick="event.preventDefault(); triggerToast('Search Active', 'Redirecting you to catalog showcase search...')" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Search</span>
+        </a>
+        <a href="/cart" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 relative cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Cart</span>
+        </a>
+        <a href="/profile" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">person</span>
+            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Profile</span>
+        </a>
+    </nav>
+
+    <!-- simulated Rx uploader javascript logic -->
+    <script>
+        function triggerToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-desc').textContent = desc;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // Mock upload drag/drop simulation
+        function handleFile(file) {
+            if (!file) return;
+
+            const prompt = document.getElementById('upload-prompt');
+            const progress = document.getElementById('upload-progress');
+            const bar = document.getElementById('progress-bar');
+            const checklist = document.getElementById('audit-checklist-card');
+
+            prompt.classList.add('hidden');
+            progress.classList.remove('hidden');
+
+            // Reset checklist values
+            document.getElementById('check-sig-val').textContent = "AUDITING";
+            document.getElementById('check-sig-val').className = "font-bold tracking-wider text-tertiary animate-pulse";
+            document.getElementById('check-date-val').textContent = "PENDING";
+            document.getElementById('check-date-val').className = "font-bold tracking-wider text-outline";
+            document.getElementById('check-auth-val').textContent = "PENDING";
+            document.getElementById('check-auth-val').className = "font-bold tracking-wider text-outline";
+
+            let percent = 0;
+            const interval = setInterval(() => {
+                percent += 20;
+                bar.style.width = percent + "%";
+
+                if (percent === 40) {
+                    document.getElementById('check-sig-val').textContent = "VERIFIED ✓";
+                    document.getElementById('check-sig-val').className = "font-bold tracking-wider text-secondary";
+                    
+                    document.getElementById('check-date-val').textContent = "AUDITING";
+                    document.getElementById('check-date-val').className = "font-bold tracking-wider text-tertiary animate-pulse";
+                }
+
+                if (percent === 80) {
+                    document.getElementById('check-date-val').textContent = "VERIFIED ✓";
+                    document.getElementById('check-date-val').className = "font-bold tracking-wider text-secondary";
+                    
+                    document.getElementById('check-auth-val').textContent = "AUDITING";
+                    document.getElementById('check-auth-val').className = "font-bold tracking-wider text-tertiary animate-pulse";
+                }
+
+                if (percent >= 100) {
+                    clearInterval(interval);
+                    
+                    document.getElementById('check-auth-val').textContent = "VERIFIED ✓";
+                    document.getElementById('check-auth-val').className = "font-bold tracking-wider text-secondary";
+
+                    setTimeout(() => {
+                        progress.classList.add('hidden');
+                        const success = document.getElementById('upload-success');
+                        success.classList.remove('hidden');
+                        document.getElementById('file-name-display').textContent = file.name + " (" + (file.size / 1024).toFixed(1) + " KB)";
+                        
+                        triggerToast("Prescription Verified", "Medicines successfully authorized and added to checkout register.");
+                    }, 400);
+                }
+            }, 600);
+        }
+    </script>
+</body>
+</html>
