@@ -99,7 +99,11 @@
     </script>
 <style>
         body {
-            background-color: #0b1326;
+            background-color: #050a17;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(68, 226, 205, 0.06) 0px, transparent 50%);
+            min-height: 100vh;
             color: #dae2fd;
             -webkit-font-smoothing: antialiased;
         }
@@ -107,9 +111,22 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
+            background: rgba(23, 31, 51, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(129, 140, 248, 0.12);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(129, 140, 248, 0.35);
+        }
+        .premium-glass {
+            background: rgba(13, 20, 38, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(129, 140, 248, 0.18);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
     </style>
 <style>
@@ -258,9 +275,10 @@
 <button class="absolute right-2 top-2 px-4 py-1.5 bg-surface-container-highest text-primary rounded-md font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors">Apply</button>
 </div>
 <!-- Checkout Button -->
-<button class="w-full py-4 bg-primary-container text-on-primary-container rounded-xl font-headline-lg-mobile text-headline-lg-mobile font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
-                        Proceed to Checkout
-                        <span class="material-symbols-outlined">arrow_forward</span>
+<button id="checkout-btn" onclick="handleCheckout()" class="w-full py-4 bg-primary-container text-on-primary-container rounded-xl font-headline-lg-mobile text-headline-lg-mobile font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <span id="checkout-text">Proceed to Checkout</span>
+                        <span id="checkout-icon" class="material-symbols-outlined">arrow_forward</span>
+                        <div id="checkout-spinner" class="hidden w-5 h-5 rounded-full border-2 border-background border-t-transparent animate-spin"></div>
 </button>
 <div class="mt-6 flex items-center justify-center gap-4">
 <span class="material-symbols-outlined text-on-surface-variant text-[20px]">lock</span>
@@ -280,6 +298,17 @@
 </div>
 </div>
 </main>
+
+    <!-- Success Toast Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 premium-glass border-secondary/40 px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/40 text-secondary">
+            <span class="material-symbols-outlined text-lg font-bold">check</span>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-on-surface" id="toast-title">Cart Operations</h4>
+            <p class="text-xs text-on-surface-variant" id="toast-desc">Transaction recorded.</p>
+        </div>
+    </div>
     <!-- BottomNavBar -->
     <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-[480px] w-[calc(100%-32px)] z-50 flex justify-around items-center px-3 py-2 bg-surface-container/90 backdrop-blur-lg border border-outline-variant/30 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
         <a href="/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
@@ -305,6 +334,79 @@
         </a>
     </nav>
 <script>
+        // Toast visual feedback notifier helper
+        function triggerToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-desc').textContent = desc;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        async function handleCheckout() {
+            const btn = document.getElementById('checkout-btn');
+            const text = document.getElementById('checkout-text');
+            const icon = document.getElementById('checkout-icon');
+            const spinner = document.getElementById('checkout-spinner');
+
+            // Disable button and show spinner
+            btn.disabled = true;
+            text.textContent = "Processing Order...";
+            icon.classList.add('hidden');
+            spinner.classList.remove('hidden');
+
+            try {
+                // Fetch to place order
+                const response = await fetch('/api/order/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items: [
+                            { product_id: 1, quantity: 1 },
+                            { product_id: 2, quantity: 1 },
+                            { product_id: 3, quantity: 2 }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    triggerToast("Checkout Verified", "Order placed successfully! Routing to your profile console...");
+                    setTimeout(() => {
+                        window.location.href = '/profile';
+                    }, 1200);
+                } else {
+                    // Check if unauthorized
+                    if (response.status === 401 || (data.message && data.message.includes("login"))) {
+                        triggerToast("Authentication Required", "Please log in to finalize your purchase.");
+                        setTimeout(() => {
+                            window.location.href = '/auth/login';
+                        }, 1200);
+                    } else {
+                        triggerToast("Checkout Failed", data.message || "Failed to complete purchase.");
+                        btn.disabled = false;
+                        text.textContent = "Proceed to Checkout";
+                        icon.classList.remove('hidden');
+                        spinner.classList.add('hidden');
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+                triggerToast("Connection Mismatch", "Could not establish database authorization link.");
+                btn.disabled = false;
+                text.textContent = "Proceed to Checkout";
+                icon.classList.remove('hidden');
+                spinner.classList.add('hidden');
+            }
+        }
+
         // Micro-interaction: Subtle parallax on scroll for cards
         window.addEventListener('scroll', () => {
             const cards = document.querySelectorAll('.glass-card');
