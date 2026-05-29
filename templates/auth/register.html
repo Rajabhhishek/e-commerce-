@@ -126,19 +126,19 @@
         <div class="w-full lg:w-1/2 flex flex-col gap-6 max-w-xl text-center lg:text-left">
             <div class="inline-flex items-center justify-center lg:justify-start gap-2.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse shadow-lg shadow-secondary/50"></span>
-                <span class="font-label-sm text-secondary uppercase tracking-widest text-xs font-semibold">User Catalog Registration</span>
+                <span class="font-label-sm text-secondary uppercase tracking-widest text-xs font-semibold">Online Supermarket</span>
             </div>
             <h2 class="font-display-lg text-4xl lg:text-[56px] font-bold text-on-surface leading-[1.05] tracking-tight">
-                Establish Your <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container via-primary to-secondary">Customer Account.</span>
+                Your Daily Needs, <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container via-primary to-secondary">Delivered Fresh.</span>
             </h2>
             <p class="font-body-lg text-on-surface-variant text-lg leading-relaxed mt-2">
-                Sign up as a customer to instantly browse premium catalogs, place multi-vendor orders, unlock cart rewards, and track delivery riders in real time.
+                Join our digital marketplace. Shop for fresh groceries, premium electronics, and daily essentials from local vendors. Everything you need, at your fingertips.
             </p>
             <div class="mt-6 p-4 rounded-2xl bg-surface-container/30 border border-outline-variant/20 text-left flex items-start gap-3">
-                <span class="material-symbols-outlined text-secondary text-xl mt-0.5">security</span>
+                <span class="material-symbols-outlined text-secondary text-xl mt-0.5">shopping_basket</span>
                 <p class="text-xs text-on-surface-variant leading-relaxed">
-                    <span class="font-bold text-on-surface">Platform Security Enforcement:</span> Public registration is limited exclusively to customers. Shop Owners (Vendors) and Delivery Riders must be pre-approved or registered through administrative consoles.
+                    <span class="font-bold text-on-surface">Seamless Shopping:</span> Browse thousands of products, enjoy exclusive discounts, and track your delivery in real-time.
                 </p>
             </div>
         </div>
@@ -148,58 +148,50 @@
             <div class="premium-glass neon-border rounded-3xl p-8 relative">
                 
                 <div class="mb-8 text-center relative">
-                    <h3 class="font-display-lg text-3xl font-bold text-on-surface tracking-tight">Access Registry</h3>
-                    <p class="text-sm text-on-surface-variant mt-1.5">Configure your customer identification key</p>
+                    <h3 class="font-display-lg text-3xl font-bold text-on-surface tracking-tight">Login / Register</h3>
+                    <p class="text-sm text-on-surface-variant mt-1.5">Enter your mobile number to continue</p>
                 </div>
 
                 <!-- Form -->
                 <form id="registerForm" class="flex flex-col gap-5">
                     
-                    <!-- Username Field -->
+                    <!-- Name Field -->
                     <div class="flex flex-col gap-1.5">
-                        <label for="username" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">Public Nickname</label>
+                        <label for="name" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">Full Name</label>
                         <div class="input-glow-focus flex items-center bg-surface-container-low/80 border border-outline-variant/60 rounded-xl px-4 py-3.5 transition-all">
                             <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">person</span>
-                            <input type="text" id="username" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-outline" placeholder="choose_username"/>
+                            <input type="text" id="name" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-outline" placeholder="Your Name"/>
                         </div>
                     </div>
 
-                    <!-- Email Field -->
+                    <!-- Phone Field -->
                     <div class="flex flex-col gap-1.5">
-                        <label for="email" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">Email Address</label>
+                        <label for="phone" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">Mobile Number</label>
                         <div class="input-glow-focus flex items-center bg-surface-container-low/80 border border-outline-variant/60 rounded-xl px-4 py-3.5 transition-all">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">mail</span>
-                            <input type="email" id="email" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-outline" placeholder="yourname@domain.com"/>
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">phone_iphone</span>
+                            <span class="text-on-surface-variant mr-2 font-mono">+91</span>
+                            <input type="tel" id="phone" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-outline" placeholder="9876543210" pattern="[0-9]{10}"/>
                         </div>
                     </div>
 
-                    <!-- Password Field -->
-                    <div class="flex flex-col gap-1.5">
-                        <label for="password" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">Authentication Key</label>
-                        <div class="input-glow-focus flex items-center bg-surface-container-low/80 border border-outline-variant/60 rounded-xl px-4 py-3.5 transition-all">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">lock</span>
-                            <input type="password" id="password" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-outline" placeholder="••••••••••••"/>
-                            <button type="button" onclick="togglePassword('password', 'pwd-icon-1')" class="text-on-surface-variant hover:text-on-surface select-none ml-2 transition-colors">
-                                <span class="material-symbols-outlined text-xl" id="pwd-icon-1">visibility</span>
-                            </button>
-                        </div>
-                    </div>
+                    <!-- OTP Button -->
+                    <button type="button" id="sendOtpBtn" onclick="sendOTP()" class="w-full py-3 rounded-xl bg-surface-container-high border border-outline-variant/50 font-title-md text-sm font-bold text-primary hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <span>Send OTP</span>
+                        <span class="material-symbols-outlined text-lg">sms</span>
+                    </button>
 
-                    <!-- Confirm Password Field -->
-                    <div class="flex flex-col gap-1.5">
-                        <label for="confirm_password" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">Confirm Key</label>
+                    <!-- OTP Field (Hidden initially) -->
+                    <div id="otp-section" class="flex flex-col gap-1.5 hidden opacity-0 transition-opacity duration-300">
+                        <label for="otp" class="text-xs font-mono font-bold text-on-surface-variant tracking-wider uppercase ml-1.5">One-Time Password</label>
                         <div class="input-glow-focus flex items-center bg-surface-container-low/80 border border-outline-variant/60 rounded-xl px-4 py-3.5 transition-all">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">lock_reset</span>
-                            <input type="password" id="confirm_password" required class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface text-sm placeholder:text-outline" placeholder="••••••••••••"/>
-                            <button type="button" onclick="togglePassword('confirm_password', 'pwd-icon-2')" class="text-on-surface-variant hover:text-on-surface select-none ml-2 transition-colors">
-                                <span class="material-symbols-outlined text-xl" id="pwd-icon-2">visibility</span>
-                            </button>
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3 select-none text-xl">password</span>
+                            <input type="text" id="otp" class="bg-transparent border-0 p-0 w-full focus:ring-0 text-on-surface tracking-widest text-lg placeholder:text-outline" placeholder="••••" maxlength="4"/>
                         </div>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" id="submitBtn" class="w-full mt-3 py-4 rounded-xl bg-gradient-to-r from-primary-container via-primary to-secondary font-title-md text-sm font-bold text-background shadow-lg shadow-primary-container/15 hover:shadow-primary-container/25 hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer">
-                        <span>Register Account</span>
+                    <button type="submit" id="submitBtn" class="w-full mt-3 py-4 rounded-xl bg-gradient-to-r from-primary-container via-primary to-secondary font-title-md text-sm font-bold text-background shadow-lg shadow-primary-container/15 hover:shadow-primary-container/25 hover:brightness-105 active:scale-[0.98] transition-all hidden items-center justify-center gap-2 cursor-pointer">
+                        <span>Verify & Continue</span>
                         <span class="material-symbols-outlined text-lg font-bold" id="btn-arrow">arrow_forward</span>
                         <div class="hidden w-5 h-5 rounded-full border-2 border-background border-t-transparent animate-spin" id="btn-spinner"></div>
                     </button>
@@ -208,8 +200,8 @@
 
                 <!-- Toggle link -->
                 <div class="mt-5 text-center text-xs text-on-surface-variant">
-                    Already registered? 
-                    <a href="/auth/login" class="font-bold text-primary hover:text-secondary hover:underline ml-1.5 transition-colors">Log In instead</a>
+                    Vendor or Admin? 
+                    <a href="/auth/login" class="font-bold text-primary hover:text-secondary hover:underline ml-1.5 transition-colors">Access Console</a>
                 </div>
 
             </div>
@@ -235,18 +227,6 @@
 
     <!-- JS Logic for Authentication -->
     <script>
-        function togglePassword(inputId, iconId) {
-            const pwdInput = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            if (pwdInput.type === 'password') {
-                pwdInput.type = 'text';
-                icon.textContent = 'visibility_off';
-            } else {
-                pwdInput.type = 'password';
-                icon.textContent = 'visibility';
-            }
-        }
-
         function triggerToast(title, desc) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-title').textContent = title;
@@ -261,18 +241,60 @@
             }, 3000);
         }
 
+        let otpSent = false;
+
+        function sendOTP() {
+            const phoneInput = document.getElementById('phone');
+            if(phoneInput.value.length !== 10) {
+                triggerToast("Invalid Number", "Please enter a valid 10-digit mobile number.");
+                return;
+            }
+            
+            // Mock sending OTP
+            const sendBtn = document.getElementById('sendOtpBtn');
+            sendBtn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">sync</span><span>Sending...</span>';
+            
+            setTimeout(() => {
+                sendBtn.style.display = 'none';
+                
+                const otpSection = document.getElementById('otp-section');
+                otpSection.classList.remove('hidden');
+                setTimeout(() => {
+                    otpSection.classList.remove('opacity-0');
+                }, 50);
+                
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.remove('hidden');
+                submitBtn.classList.add('flex');
+                
+                document.getElementById('otp').required = true;
+                
+                triggerToast("OTP Sent", "Mock OTP has been sent to +91 " + phoneInput.value);
+                otpSent = true;
+            }, 1000);
+        }
+
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const confirm_password = document.getElementById('confirm_password').value;
+            if (!otpSent) return;
+
+            const phone = document.getElementById('phone').value.trim();
+            const otp = document.getElementById('otp').value.trim();
             
-            if (password !== confirm_password) {
-                triggerToast("Key Mismatch", "The passwords provided are not identical.");
+            if (otp.length < 4) {
+                triggerToast("Invalid OTP", "Please enter the complete OTP.");
                 return;
             }
+
+            const nameInput = document.getElementById('name');
+            const name = nameInput ? nameInput.value.trim() : "";
+
+            // Since our backend still requires username, email, and password, 
+            // we create mock values derived from the phone number for seamless integration.
+            const username = name.length > 0 ? name : "user_" + phone;
+            const email = phone + "@shopsmart.local";
+            const password = "otp_" + phone; // Mock secure password
 
             const btn = document.getElementById('submitBtn');
             const arrow = document.getElementById('btn-arrow');
@@ -283,25 +305,42 @@
             spinner.classList.remove('hidden');
 
             try {
-                const response = await fetch('/auth/register', {
+                // First try to login (in case user already exists)
+                const loginRes = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, role: 'customer' })
+                });
+                
+                const loginData = await loginRes.json();
+                
+                if (loginRes.ok && loginData.success) {
+                    // Existing user successfully logged in
+                    triggerToast("Welcome Back!", "Verification successful. Routing...");
+                    setTimeout(() => { window.location.href = loginData.redirect; }, 1200);
+                    return;
+                }
+                
+                // If login fails, try to register
+                const registerRes = await fetch('/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
                 });
                 
-                const data = await response.json();
-                
+                const registerData = await registerRes.json();
+
                 btn.disabled = false;
                 arrow.classList.remove('hidden');
                 spinner.classList.add('hidden');
 
-                if (data.success) {
+                if (registerData.success) {
                     triggerToast("Account Created", "Your customer account was registered! Routing...");
                     setTimeout(() => {
-                        window.location.href = data.redirect;
+                        window.location.href = registerData.redirect;
                     }, 1200);
                 } else {
-                    triggerToast("Registry Error", data.message || "Failed to complete signup.");
+                    triggerToast("Registry Error", registerData.message || "Failed to complete signup.");
                 }
 
             } catch (err) {

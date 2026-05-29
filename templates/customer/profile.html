@@ -7,24 +7,84 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.getElementById('theme-icon').innerText = 'dark_mode';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('theme-icon').innerText = 'light_mode';
+            }
+        }
+    </script>
     <style>
+        :root {
+            --color-background: #f8fafc;
+            --color-surface: #ffffff;
+            --color-surface-container: #f1f5f9;
+            --color-surface-container-low: #f8fafc;
+            --color-surface-container-high: #e2e8f0;
+            --color-surface-container-highest: #cbd5e1;
+            --color-on-background: #0f172a;
+            --color-on-surface: #0f172a;
+            --color-on-surface-variant: #475569;
+            --color-primary: #4f46e5;
+            --color-primary-container: #e0e7ff;
+            --color-on-primary: #ffffff;
+            --color-secondary: #0d9488;
+            --color-on-secondary: #ffffff;
+            --color-tertiary: #d97706;
+            --color-outline: #94a3b8;
+            --color-outline-variant: #cbd5e1;
+            --color-error: #ef4444;
+        }
+        .dark {
+            --color-background: #050a17;
+            --color-surface: #0d1426;
+            --color-surface-container: #111a30;
+            --color-surface-container-low: #090f1d;
+            --color-surface-container-high: #1a2540;
+            --color-surface-container-highest: #223154;
+            --color-on-background: #dae2fd;
+            --color-on-surface: #dae2fd;
+            --color-on-surface-variant: #94a3b8;
+            --color-primary: #bdc2ff;
+            --color-primary-container: #818cf8;
+            --color-on-primary: #131e8c;
+            --color-secondary: #44e2cd;
+            --color-on-secondary: #003731;
+            --color-tertiary: #f7bd3e;
+            --color-outline: #475569;
+            --color-outline-variant: #334155;
+            --color-error: #f87171;
+        }
+        body {
+            background-color: var(--color-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .premium-glass {
-            background: rgba(13, 20, 38, 0.65);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(129, 140, 248, 0.18);
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-outline-variant);
         }
-        body {
-            background-color: #050a17;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(68, 226, 205, 0.06) 0px, transparent 50%);
-            min-height: 100vh;
+        .dark .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .premium-glass {
+            background: linear-gradient(145deg, var(--color-surface-container), var(--color-surface));
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1), 0 8px 32px rgba(0,0,0,0.1);
         }
     </style>
     <script id="tailwind-config">
@@ -33,25 +93,24 @@
           theme: {
             extend: {
               "colors": {
-                      "background": "#050a17",
-                      "surface": "#0d1426",
-                      "surface-container": "#111a30",
-                      "surface-container-low": "#090f1d",
-                      "surface-container-high": "#1a2540",
-                      "surface-container-highest": "#223154",
-                      "on-background": "#dae2fd",
-                      "on-surface": "#dae2fd",
-                      "on-surface-variant": "#94a3b8",
-                      "primary": "#bdc2ff",
-                      "primary-container": "#818cf8",
-                      "on-primary": "#131e8c",
-                      "secondary": "#44e2cd",
-                      "on-secondary": "#003731",
-                      "tertiary": "#f7bd3e",
-                      "on-tertiary": "#402d00",
-                      "outline": "#475569",
-                      "outline-variant": "#334155",
-                      "error": "#f87171"
+                      "background": "var(--color-background)",
+                      "surface": "var(--color-surface)",
+                      "surface-container": "var(--color-surface-container)",
+                      "surface-container-low": "var(--color-surface-container-low)",
+                      "surface-container-high": "var(--color-surface-container-high)",
+                      "surface-container-highest": "var(--color-surface-container-highest)",
+                      "on-background": "var(--color-on-background)",
+                      "on-surface": "var(--color-on-surface)",
+                      "on-surface-variant": "var(--color-on-surface-variant)",
+                      "primary": "var(--color-primary)",
+                      "primary-container": "var(--color-primary-container)",
+                      "on-primary": "var(--color-on-primary)",
+                      "secondary": "var(--color-secondary)",
+                      "on-secondary": "var(--color-on-secondary)",
+                      "tertiary": "var(--color-tertiary)",
+                      "outline": "var(--color-outline)",
+                      "outline-variant": "var(--color-outline-variant)",
+                      "error": "var(--color-error)"
               },
               "borderRadius": {
                       "DEFAULT": "0.25rem",
@@ -64,20 +123,9 @@
               "fontFamily": {
                       "body-md": ["Inter"],
                       "headline-lg-mobile": ["Hanken Grotesk"],
-                      "body-lg": ["Inter"],
                       "title-md": ["Hanken Grotesk"],
                       "headline-lg": ["Hanken Grotesk"],
-                      "label-sm": ["JetBrains Mono"],
-                      "display-lg": ["Hanken Grotesk"]
-              },
-              "fontSize": {
-                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
-                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                      "label-sm": ["JetBrains Mono"]
               }
             }
           }
@@ -95,8 +143,12 @@
             <h1 class="font-headline-lg-mobile text-xl font-bold tracking-tight text-primary cursor-pointer">ShopSmart</h1>
         </div>
         <div class="flex items-center gap-3">
-            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center">
+                        <button onclick="toggleTheme()" class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
+                <span id="theme-icon" class="material-symbols-outlined text-primary">light_mode</span>
+            </button>
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
                 <span class="material-symbols-outlined text-primary">notifications</span>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-secondary rounded-full"></span>
             </button>
             {% if current_user.is_authenticated %}
             <a href="/auth/logout" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-background bg-gradient-to-r from-primary-container to-secondary hover:brightness-105 rounded-xl transition-all active:scale-95 flex items-center gap-1.5 shadow-md shadow-primary-container/10 cursor-pointer">
@@ -270,12 +322,10 @@
             <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Home</span>
         </a>
         <a href="/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
-            <span class="material-symbols-outlined text-[20px]">category</span>
-            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Categories</span>
+            <span class="material-symbols-outlined text-[20px]">medical_services</span><span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span>
         </a>
         <a href="/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 cursor-pointer">
-            <span class="material-symbols-outlined text-[20px]">search</span>
-            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Search</span>
+            <span class="material-symbols-outlined text-[20px]">handyman</span><span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Services</span>
         </a>
         <a href="/cart" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4.5 py-2 transition-all active:scale-95 relative cursor-pointer">
             <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
@@ -287,5 +337,15 @@
             <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Profile</span>
         </a>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.getElementById('theme-icon').innerText = 'light_mode';
+            } else {
+                document.getElementById('theme-icon').innerText = 'dark_mode';
+            }
+        });
+    </script>
 </body>
 </html>

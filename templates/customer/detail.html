@@ -140,10 +140,13 @@
 <button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80">
 <span class="material-symbols-outlined text-primary">search</span>
 </button>
-<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-opacity active:opacity-80 relative">
-<span class="material-symbols-outlined text-primary">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
-</button>
+            <button onclick="toggleTheme()" class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
+                <span id="theme-icon" class="material-symbols-outlined text-primary">light_mode</span>
+            </button>
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
+                <span class="material-symbols-outlined text-primary">notifications</span>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-secondary rounded-full"></span>
+            </button>
 {% if current_user.is_authenticated %}
 <a href="/auth/logout" class="px-4 py-2 text-xs font-bold uppercase tracking-wider text-background bg-primary hover:bg-primary-container rounded-xl transition-all active:scale-95 flex items-center gap-1.5 shadow-md shadow-primary/10">
 <span class="material-symbols-outlined text-sm font-bold">logout</span>
@@ -278,4 +281,14 @@
             });
         }
 </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.getElementById('theme-icon').innerText = 'light_mode';
+            } else {
+                document.getElementById('theme-icon').innerText = 'dark_mode';
+            }
+        });
+    </script>
 </body></html>

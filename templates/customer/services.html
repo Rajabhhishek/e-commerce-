@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>ShopSmart - Pharmacy Node</title>
+    <title>ShopSmart - Home Services</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -168,118 +168,106 @@
         
         <!-- Welcome banner -->
         <div class="mt-4">
-            <span class="text-[10px] font-mono font-bold text-secondary bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">24/7 Clinical Support</span>
-            <h2 class="font-headline-lg text-3xl font-bold tracking-tight text-on-surface mt-3">ShopSmart Pharmacy & Health</h2>
-            <p class="text-on-surface-variant text-sm mt-1">Acquire verified medical supplies, upload prescriptions, and coordinate express deliveries.</p>
+            <span class="text-[10px] font-mono font-bold text-tertiary bg-tertiary/10 border border-tertiary/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold text-on-surface">Verified Professionals</span>
+            <h2 class="font-headline-lg text-3xl font-bold tracking-tight text-on-surface mt-3">ShopSmart Home Services</h2>
+            <p class="text-on-surface-variant text-sm mt-1">Book trusted plumbers, carpenters, painters, and other skilled professionals instantly.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start mt-8">
             
-            <!-- Left Side: Prescription Uploader & Teleconsult -->
-            <div class="md:col-span-5 flex flex-col gap-6 w-full">
-                
-                <!-- Tactical Prescription Uploader -->
-                <div class="premium-glass p-6 rounded-3xl flex flex-col gap-5 border border-secondary/30">
-                    <div class="flex items-center gap-2.5">
-                        <span class="material-symbols-outlined text-secondary">clinical_notes</span>
-                        <h3 class="font-headline-lg text-base font-bold text-on-surface">Digital Rx Portal</h3>
-                    </div>
-                    
-                    <p class="text-xs text-on-surface-variant leading-relaxed">Upload a clear photo of your medical prescription. Our clinical auditors will verify it and add designated medicines to your active cart node.</p>
-                    
-                    <!-- Drop area -->
-                    <div id="drop-area" class="border-2 border-dashed border-outline-variant/60 rounded-2xl p-6 text-center hover:border-secondary transition-colors cursor-pointer flex flex-col items-center justify-center min-h-[140px] bg-surface-container-low/40 relative group" onclick="document.getElementById('rx-file-input').click()">
-                        <input type="file" id="rx-file-input" class="hidden" accept="image/*,.pdf" onchange="handleFile(this.files[0])"/>
-                        
-                        <div id="upload-prompt" class="flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-3xl text-secondary animate-pulse block mb-2 group-hover:scale-110 transition-transform">cloud_upload</span>
-                            <span class="text-xs font-bold text-on-surface">Drag & Drop Prescription</span>
-                            <span class="text-[10px] text-on-surface-variant mt-1">JPEG, PNG, PDF up to 5MB</span>
-                        </div>
-
-                        <div id="upload-progress" class="hidden w-full flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-3xl animate-spin text-secondary block mb-2">progress_activity</span>
-                            <span class="text-xs font-bold text-on-surface">Auditing prescription details...</span>
-                            <div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-3 max-w-[180px] border border-outline-variant/30">
-                                <div class="bg-secondary h-full rounded-full transition-all duration-1000" id="progress-bar" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div id="upload-success" class="hidden w-full flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-3xl text-secondary block mb-2">check_circle</span>
-                            <span class="text-xs font-bold text-secondary">Prescription Uploaded ✓</span>
-                            <span class="text-[10px] text-on-surface-variant mt-1" id="file-name-display">File verified.</span>
+            <!-- Service Card 1: Plumber -->
+            <div class="glass-card rounded-3xl flex flex-col relative overflow-hidden group">
+                <div class="h-40 w-full relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80" alt="Plumbing Service" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+                    <div class="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-xl bg-secondary/20 backdrop-blur-md flex items-center justify-center text-secondary border border-secondary/30 shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-2xl">plumbing</span>
                         </div>
                     </div>
-
-                    <!-- Verification Checklist -->
-                    <div class="bg-surface-container-low/80 p-3.5 rounded-xl border border-outline-variant/30 flex flex-col gap-2 font-mono text-[10px]" id="audit-checklist-card">
-                        <div class="flex items-center justify-between text-on-surface-variant" id="check-sig">
-                            <span>1. CLINICAL DOCTOR SIGNATURE</span>
-                            <span class="font-bold tracking-wider" id="check-sig-val">PENDING</span>
-                        </div>
-                        <div class="flex items-center justify-between text-on-surface-variant" id="check-date">
-                            <span>2. PRESCRIPTION DATE STAMP</span>
-                            <span class="font-bold tracking-wider" id="check-date-val">PENDING</span>
-                        </div>
-                        <div class="flex items-center justify-between text-on-surface-variant" id="check-auth">
-                            <span>3. INTEGRITY AUTHENTICATION</span>
-                            <span class="font-bold tracking-wider" id="check-auth-val">PENDING</span>
-                        </div>
+                    <div class="absolute top-3 right-3">
+                        <span class="text-[10px] font-mono font-bold text-background bg-secondary px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">Available Now</span>
                     </div>
                 </div>
-
-                <!-- Teleconsult Doctor card -->
-                <div class="premium-glass p-5 rounded-2xl flex items-center justify-between relative overflow-hidden group border-primary/20">
-                    <div class="z-10 max-w-[70%]">
-                        <span class="material-symbols-outlined text-primary text-xl">medical_services</span>
-                        <h4 class="text-sm font-bold text-on-surface mt-2">Consult Online Doctor</h4>
-                        <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">No prescription? Get digital verification within 10 minutes via our video medical hotline.</p>
-                        <button onclick="triggerToast('Teleconsult Active', 'Routing call to duty officer...')" class="mt-3 text-[10px] font-bold uppercase tracking-wider text-primary hover:text-secondary transition-colors">Start Video Call →</button>
-                    </div>
-                    <div class="w-14 h-14 rounded-xl bg-primary-container/10 flex items-center justify-center border border-primary-container/20 text-primary group-hover:scale-110 transition-transform shadow shadow-primary/10">
-                        <span class="material-symbols-outlined text-3xl">videocam</span>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="font-headline-lg text-xl font-bold text-on-surface">Expert Plumber</h3>
+                    <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed flex-1">Fix leaks, install pipes, unclog drains, and handle all your plumbing emergencies instantly.</p>
+                    <div class="mt-4 pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+                        <span class="font-bold text-on-surface">₹299 <span class="text-xs text-on-surface-variant font-normal">/ visit</span></span>
+                        <button class="bg-primary/10 text-primary hover:bg-primary hover:text-background border border-primary/20 hover:border-primary px-4 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm" onclick="triggerToast('Booking Confirmed', 'A plumber will reach your location within 30 minutes.')">Book Now</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Side: Medical & Pharmacy Products -->
-            <div class="md:col-span-7 flex flex-col gap-5 w-full">
-                <div class="flex justify-between items-center border-b border-outline-variant/30 pb-3">
-                    <h3 class="font-headline-lg text-lg font-bold text-on-surface flex items-center gap-2">
-                        Essential Health Supplies
-                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded bg-surface-container-high border border-outline-variant/20 text-on-surface-variant font-semibold uppercase tracking-wider">{{ products|length }} Items</span>
-                    </h3>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" id="pharmacy-grid">
-                    {% for p in products %}
-                    <div class="glass-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="window.location.href='/product/{{ p.id }}'">
-                        <div>
-                            <!-- Showcase -->
-                            <div class="aspect-square w-full rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/20 relative">
-                                <img alt="{{ p.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ p.image_url }}"/>
-                                <span class="absolute bottom-2.5 left-2.5 bg-background/85 backdrop-blur-md text-secondary border border-secondary/30 text-[9px] font-mono font-bold tracking-wider px-2 py-0.5 rounded uppercase">
-                                    {{ p.category.name if p.category else 'Medicine' }}
-                                </span>
-                            </div>
-
-                            <!-- Info -->
-                            <div class="mt-4 flex flex-col gap-1">
-                                <h4 class="font-title-md text-sm font-bold text-on-surface truncate group-hover:text-secondary transition-colors">{{ p.name }}</h4>
-                                <p class="text-xs text-on-surface-variant line-clamp-2 leading-relaxed h-8 mt-0.5">{{ p.description }}</p>
-                            </div>
-                        </div>
-
-                        <!-- Price and checkout trigger -->
-                        <div class="mt-4 pt-3 border-t border-outline-variant/15 flex items-center justify-between">
-                            <span class="text-secondary font-bold font-mono text-sm">₹{{ "%.2f"|format(p.price) }}</span>
-                            <span class="text-[10px] font-mono font-bold text-secondary bg-secondary/10 border border-secondary/20 px-2 py-0.5 rounded uppercase">
-                                {{ p.stock }} left
-                            </span>
+            <!-- Service Card 2: Carpenter -->
+            <div class="glass-card rounded-3xl flex flex-col relative overflow-hidden group">
+                <div class="h-40 w-full relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1505015920881-0f83c2f7c95e?auto=format&fit=crop&w=600&q=80" alt="Carpentry Service" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+                    <div class="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-xl bg-tertiary/20 backdrop-blur-md flex items-center justify-center text-tertiary border border-tertiary/30 shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-2xl">carpenter</span>
                         </div>
                     </div>
-                    {% endfor %}
+                    <div class="absolute top-3 right-3">
+                        <span class="text-[10px] font-mono font-bold text-on-surface-variant bg-surface-container-high border border-outline-variant/40 px-2.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-md shadow-md">Schedule</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="font-headline-lg text-xl font-bold text-on-surface">Master Carpenter</h3>
+                    <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed flex-1">Custom furniture, repairs, door installations, and premium woodwork tailored to your needs.</p>
+                    <div class="mt-4 pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+                        <span class="font-bold text-on-surface">₹399 <span class="text-xs text-on-surface-variant font-normal">/ visit</span></span>
+                        <button class="bg-primary/10 text-primary hover:bg-primary hover:text-background border border-primary/20 hover:border-primary px-4 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm" onclick="triggerToast('Booking Confirmed', 'A carpenter will arrive at your scheduled time.')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Card 3: Painter -->
+            <div class="glass-card rounded-3xl flex flex-col relative overflow-hidden group">
+                <div class="h-40 w-full relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=600&q=80" alt="Painting Service" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+                    <div class="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-xl bg-primary-container/20 backdrop-blur-md flex items-center justify-center text-primary-container border border-primary-container/30 shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-2xl">format_paint</span>
+                        </div>
+                    </div>
+                    <div class="absolute top-3 right-3">
+                        <span class="text-[10px] font-mono font-bold text-background bg-secondary px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">Available Now</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="font-headline-lg text-xl font-bold text-on-surface">Pro Painter</h3>
+                    <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed flex-1">Wall painting, touch-ups, texture design, and complete home makeovers with premium colors.</p>
+                    <div class="mt-4 pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+                        <span class="font-bold text-on-surface">₹499 <span class="text-xs text-on-surface-variant font-normal">/ visit</span></span>
+                        <button class="bg-primary/10 text-primary hover:bg-primary hover:text-background border border-primary/20 hover:border-primary px-4 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm" onclick="triggerToast('Booking Confirmed', 'A painter will be assigned to you shortly.')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Card 4: Electrician -->
+            <div class="glass-card rounded-3xl flex flex-col relative overflow-hidden group">
+                <div class="h-40 w-full relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80" alt="Electrical Service" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+                    <div class="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-xl bg-error/20 backdrop-blur-md flex items-center justify-center text-error border border-error/30 shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-2xl">electrical_services</span>
+                        </div>
+                    </div>
+                    <div class="absolute top-3 right-3">
+                        <span class="text-[10px] font-mono font-bold text-on-surface-variant bg-surface-container-high border border-outline-variant/40 px-2.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-md shadow-md">Schedule</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="font-headline-lg text-xl font-bold text-on-surface">Safe Electrician</h3>
+                    <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed flex-1">Wiring fixes, appliance setup, switchboard repairs, and safety checks done securely.</p>
+                    <div class="mt-4 pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+                        <span class="font-bold text-on-surface">₹249 <span class="text-xs text-on-surface-variant font-normal">/ visit</span></span>
+                        <button class="bg-primary/10 text-primary hover:bg-primary hover:text-background border border-primary/20 hover:border-primary px-4 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm" onclick="triggerToast('Booking Confirmed', 'An electrician will arrive at your scheduled time.')">Book Now</button>
+                    </div>
                 </div>
             </div>
 
@@ -305,15 +293,9 @@
             <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Home</span>
         </a>
         
-        <!-- ACTIVE: Pharmacy -->
-        <a href="/pharmacy" class="flex flex-col items-center justify-center bg-primary-container text-background font-bold rounded-xl px-4 py-2.5 active:scale-95 transition-all shadow-md shadow-primary-container/20 cursor-pointer">
-            <span class="material-symbols-outlined text-[20px] font-bold">medical_services</span>
-            <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span>
-        </a>
+        <a href="/pharmacy" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined text-[20px]">medical_services</span><span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Pharmacy</span></a>
 
-        <a href="/services" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 cursor-pointer">
-            <span class="material-symbols-outlined text-[20px]">handyman</span><span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Services</span>
-        </a>
+        <!-- ACTIVE: Services --><a href="/services" class="flex flex-col items-center justify-center bg-primary-container text-background font-bold rounded-xl px-4 py-2.5 active:scale-95 transition-all shadow-md shadow-primary-container/20 cursor-pointer"><span class="material-symbols-outlined text-[20px] font-bold">handyman</span><span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Services</span></a>
         <a href="/cart" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary rounded-xl px-4 py-2 transition-all active:scale-95 relative cursor-pointer">
             <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
             <span class="text-[10px] uppercase font-mono mt-0.5 tracking-wider">Cart</span>
@@ -411,4 +393,6 @@
     </script>
 </body>
 </html>
+
+
 

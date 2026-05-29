@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html class="dark" lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>ShopSmart - {{ category.name }}</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-        <script>
+import os, re
+
+folder = r'c:\Users\Hp\OneDrive\Desktop\e- commerce\templates\customer'
+
+new_head = """    <script>
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -131,67 +126,17 @@
           }
         }
     </script>
-</head>
-<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden selection:bg-primary-container/30 selection:text-primary pb-28">
+</head>"""
 
-    <!-- Header bar -->
-    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 shadow-md">
-        <div class="flex items-center gap-4">
-            <a href="/" class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center cursor-pointer">
-                <span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
-            </a>
-            <h1 class="font-headline-lg text-xl font-bold tracking-tight text-primary flex items-center gap-1.5 cursor-pointer">
-                {{ category.name }}
-            </h1>
-        </div>
-        <div class="flex items-center gap-3">
-            <a href="/cart" class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
-                <span class="material-symbols-outlined text-primary">shopping_cart</span>
-            </a>
-        </div>
-    </header>
+new_button = """            <button onclick="toggleTheme()" class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
+                <span id="theme-icon" class="material-symbols-outlined text-primary">light_mode</span>
+            </button>
+            <button class="p-2 rounded-xl hover:bg-surface-container-high/60 transition-colors flex items-center justify-center relative">
+                <span class="material-symbols-outlined text-primary">notifications</span>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-secondary rounded-full"></span>
+            </button>"""
 
-    <main class="pt-24 max-w-[1200px] mx-auto px-6 flex flex-col gap-6 mb-12">
-        <div class="flex justify-between items-center border-b border-outline-variant/20 pb-4">
-            <div>
-                <h2 class="font-headline-lg text-3xl font-bold text-on-surface">{{ category.name }}</h2>
-                <p class="text-on-surface-variant text-sm mt-1">{{ category.description }}</p>
-            </div>
-            <span class="text-[10px] font-mono px-3 py-1 rounded bg-surface-container-high border border-outline-variant/30 text-on-surface-variant">
-                {{ products|length }} Items
-            </span>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {% for p in products %}
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="window.location.href='/product/{{ p.id }}'">
-                <div>
-                    <div class="aspect-square w-full rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/15 relative">
-                        <img alt="{{ p.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ p.image_url }}"/>
-                    </div>
-                    <div class="mt-4 flex flex-col gap-1">
-                        <h4 class="font-title-md text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">{{ p.name }}</h4>
-                        <p class="text-xs text-on-surface-variant line-clamp-2 leading-relaxed h-8 mt-0.5">{{ p.description }}</p>
-                    </div>
-                </div>
-                <div class="mt-4 pt-3 border-t border-outline-variant/15 flex items-center justify-between">
-                    <span class="text-secondary font-bold font-mono text-sm">₹{{ "%.2f"|format(p.price) }}</span>
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-[10px] font-mono font-bold {{ 'text-secondary bg-secondary/15' if p.stock > 0 else 'text-error bg-error/15' }} px-2 py-0.5 rounded border {{ 'border-secondary/20' if p.stock > 0 else 'border-error/20' }}">
-                            {{ p.stock }} left
-                        </span>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="col-span-full py-16 text-center text-on-surface-variant font-mono text-sm">
-                <span class="material-symbols-outlined text-4xl block text-outline-variant mb-2">inventory_2</span>
-                No items available in this category.
-            </div>
-            {% endfor %}
-        </div>
-    </main>
-
+init_script = """
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (document.documentElement.classList.contains('dark')) {
@@ -201,6 +146,33 @@
             }
         });
     </script>
-</body>
-</html>
+</body>"""
 
+for filename in os.listdir(folder):
+    if filename.endswith('.html'):
+        filepath = os.path.join(folder, filename)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Replace head section
+        # Finds <style> up to </script>\s*</head>
+        content = re.sub(r'<style>.*?</script>\s*</head>', new_head, content, flags=re.DOTALL)
+        
+        # Replace the notification button block with theme button + notification button
+        content = re.sub(
+            r'<button class="[^"]*?">\s*<span class="material-symbols-outlined text-primary">notifications</span>.*?</button>',
+            new_button,
+            content,
+            flags=re.DOTALL
+        )
+        
+        if 'theme-icon' not in content:
+            pass # Handle gracefully
+            
+        # add script to bottom of page to init icon, only if not already added
+        if "document.addEventListener('DOMContentLoaded', () => {" not in content:
+            content = content.replace('</body>', init_script)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f'Updated {filename}')

@@ -45,6 +45,17 @@ def category_page(category_id):
     categories = Category.query.all()
     return render_template('customer/category.html', category=category, products=products, categories=categories)
 
+@customer_bp.route('/pharmacy')
+def pharmacy_page():
+    # Attempt to find Medical category, fallback to just rendering the template if not found
+    category = Category.query.filter_by(name='Medical').first()
+    products = Product.query.filter_by(category_id=category.id).all() if category else []
+    return render_template('customer/pharmacy.html', products=products)
+
+@customer_bp.route('/services')
+def services_page():
+    return render_template('customer/services.html')
+
 # --- API ENDPOINTS ---
 
 @customer_bp.route('/api/products', methods=['GET'])
